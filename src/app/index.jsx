@@ -12,7 +12,7 @@ import 'whatwg-fetch'
 import LoginPage from './LoginPage.jsx'
 import AdminPage from './AdminPage.jsx'
 import TeacherPage from './TeacherPage.jsx'
-import StudentPage from '/StudentPage.jsx'
+import StudentPage from './StudentPage.jsx'
 
 const user = {
   isLogged: false,
