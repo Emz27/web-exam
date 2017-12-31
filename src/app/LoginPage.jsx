@@ -7,7 +7,6 @@ import {
   Redirect,
   withRouter
 } from 'react-router-dom'
-import 'whatwg-fetch'
 
 class LoginPage extends React.Component{
   constructor(props) {
@@ -43,8 +42,7 @@ class LoginPage extends React.Component{
       console.log(data);
       console.log(data.isLogged)
       if(data.isLogged){
-        console.log("im logged!")
-        user.props.changeUser(data);
+        user.props.loginUser(data);
       }
       else {
         user.setState({
@@ -60,6 +58,7 @@ class LoginPage extends React.Component{
   }
   render(){
     return (
+      <Router>
       <div>
       <form onSubmit={this.handleLogin}>
         <input
@@ -77,6 +76,7 @@ class LoginPage extends React.Component{
         <input type="submit" value="Submit" />
       </form>
       </div>
+      </Router>
     )
   }
 }

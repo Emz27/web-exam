@@ -10,9 +10,9 @@ import {
 import 'whatwg-fetch'
 
 import LoginPage from './LoginPage.jsx'
-import AdminPage from './AdminPage.jsx'
-import TeacherPage from './TeacherPage.jsx'
-import StudentPage from './StudentPage.jsx'
+import {default as AdminPage} from './admin/MainPage.jsx'
+import {default as TeacherPage} from './teacher/MainPage.jsx'
+import {default as StudentPage} from './student/MainPage.jsx'
 
 const user = {
   isLogged: false,
@@ -23,6 +23,7 @@ const user = {
   type: -1,
   date_created: null
 }
+// get user session
 $.ajax({
   url: "../api/session.php",
   method: "GET",
@@ -54,44 +55,47 @@ class MainPage extends React.Component{
   constructor(props){
     super(props);
     this.state = this.props.user;
-    this.changeUser = this.changeUser.bind(this);
+    this.loginUser = this.loginUser.bind(this);
+    this.logoutUser = this.logoutUser.bind(this);
   }
-  changeUser(user){
-    console.log("hey")
+  loginUser(user){
+    console.log("yeye");
     this.setState({...user});
   }
+  logoutUser(){
+    var user = this;
+    $.ajax({
+      url: "../api/logout.php",
+      method: "GET",
+    })
+    .done(function(data){
+      user.setState({
+        isLogged: false,
+        id: -1,
+        firstname: null,
+        middlename: null,
+        lastname: null,
+        type: -1,
+        date_created: null
+      });
+    })
+    .fail(function(xhr) {
+        return alert("error in fetching session: "+ xhr);
+    });
+  }
   render(){
-    switch(user.type){
-      case "1":{
-        return (
-          <div>
-            <AdminPage />
-          </div>
-        )
-      }
-      case "2":{
-        return (
-          <div>
-            <Teacherpage />
-          </div>
-        )
-      }
-      case "3":{
-        return (
-          <div>
-            <StudentPage />
-          </div>
-        )
-      }
+    switch(this.state.type){
+      case "1": return (<div><AdminPage logoutUser={this.logoutUser} /></div>)
+      case "2": return (<div><Teacherpage logoutUser={this.logoutUser} /></div>)
+      case "3": return (<div><StudentPage logoutUser={this.logoutUser} /></div>)
       default:{
         // user not logged
         return (
-
           <div>
             <Router>
               <div>
                 <Redirect to={'/login'}/>
-                <LoginPage changeUser={this.changeUser} user={this.props.user} />
+                <LoginPage loginUser={this.loginUser} user={this.state} />
               </div>
             </Router>
           </div>
