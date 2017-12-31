@@ -7,7 +7,7 @@ var APP_DIR = path.resolve(__dirname, 'src/app');
 
 var localBuild = {
   name: "a",
-  entry: ['whatwg-fetch',APP_DIR + '/index.jsx'],
+  entry: [APP_DIR + '/index.jsx'],
   output: {
     path: LOCAL_DIR,
     filename: 'bundle.js'
@@ -35,7 +35,7 @@ var localBuild = {
 
 var serverBuild = {
   name: "b",
-  entry: ['whatwg-fetch',APP_DIR + '/index.jsx'],
+  entry: [APP_DIR + '/index.jsx'],
   output: {
     path: SERVER_DIR,
     filename: 'bundle.js'

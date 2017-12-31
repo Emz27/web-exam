@@ -3,7 +3,7 @@
       session_start();
   }
   $data['isLogged'] = false;
-  if (isset($_SESSION['id']) && $_SESSION['isLogged'] == true)
+  if (isset($_SESSION['isLogged']) && $_SESSION['isLogged'] == true)
   {
       $data['isLogged'] = true;
       $data['id'] = $_SESSION['id'];

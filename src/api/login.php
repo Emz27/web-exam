@@ -27,7 +27,7 @@
 
       $data['isLogged'] = true;
 
-      $_SESSION['idLogged'] = false;
+      $_SESSION['isLogged'] = true;
       $_SESSION['id'] = $data['id'];
       $_SESSION['firstname'] = $data['firstname'];
       $_SESSION['middlename'] = $data['middlename'];

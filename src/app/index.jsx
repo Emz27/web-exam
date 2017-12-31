@@ -85,19 +85,33 @@ class MainPage extends React.Component{
   }
   render(){
     switch(this.state.type){
-      case "1": return (<div><AdminPage logoutUser={this.logoutUser} /></div>)
-      case "2": return (<div><Teacherpage logoutUser={this.logoutUser} /></div>)
-      case "3": return (<div><StudentPage logoutUser={this.logoutUser} /></div>)
+      case "1":
+        return (
+          <div>
+            <Router><Redirect to={'/'}/></Router>
+            <AdminPage logoutUser={this.logoutUser} />
+          </div>
+        )
+      case "2":
+        return (
+          <div>
+            <Router><Redirect to={'/'}/></Router>
+            <Teacherpage logoutUser={this.logoutUser} />
+          </div>
+        )
+      case "3":
+        return (
+          <div>
+            <Router><Redirect to={'/'}/></Router>
+            <StudentPage logoutUser={this.logoutUser} />
+          </div>
+        )
       default:{
         // user not logged
         return (
           <div>
-            <Router>
-              <div>
-                <Redirect to={'/login'}/>
-                <LoginPage loginUser={this.loginUser} user={this.state} />
-              </div>
-            </Router>
+              <Router><Redirect to={'/login'}/></Router>
+              <LoginPage loginUser={this.loginUser} user={this.state} />
           </div>
         )
       }
