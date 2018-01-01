@@ -49,7 +49,7 @@ class DepartmentPage extends React.Component{
         url: "../api/admin/department/department_"+mode+".php",
         data: {
           id: this.state.id,
-          description: this.state.id
+          description: this.state.description
         }
       })
       .done((data)=>{

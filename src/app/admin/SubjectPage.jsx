@@ -66,7 +66,7 @@ class SubjectPage extends React.Component{
         url: "../api/admin/subject/subject_"+mode+".php",
         data: {
           id: this.state.id,
-          description: this.state.id,
+          description: this.state.description,
           department: this.state.department
         }
       })
