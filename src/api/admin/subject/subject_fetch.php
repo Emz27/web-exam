@@ -6,7 +6,12 @@
   if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
   }
-  $sql = "SELECT * FROM subject";
+  $sql = "SELECT
+            subject.id as id,
+            subject.description as description,
+            subject.department as department,
+            department.description as department_description
+            FROM subject left join department on subject.department = department.id";
   $result = $conn->query($sql);
   $data = array();
   if ($result->num_rows > 0) {
