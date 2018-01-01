@@ -29,7 +29,6 @@ $.ajax({
   method: "GET",
 })
 .done(function(data){
-  console.log(data);
   data = JSON.parse(data);
   if(data.isLogged){
     user.isLogged = true;

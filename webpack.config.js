@@ -1,6 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
-var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 var LOCAL_DIR = path.resolve(__dirname, 'src/public');
 var SERVER_DIR = path.resolve(__dirname, '../../../../../xampp-5.6.30/htdocs/public');
@@ -31,7 +31,7 @@ var localBuild = {
       $: "jquery",
       jQuery: "jquery"
     }),
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
     new webpack.DefinePlugin({
      'process.env.NODE_ENV': '"production"'
     }),
@@ -50,7 +50,12 @@ var localBuild = {
       },
       exclude: [/\.min\.js$/gi] // skip pre-minified libs
     })
-  ]
+  ],
+  watch: true,
+  watchOptions: {
+    aggregateTimeout: 300,
+    poll: 1000
+  }
 };
 
 var serverBuild = {
@@ -78,7 +83,7 @@ var serverBuild = {
       $: "jquery",
       jQuery: "jquery"
     }),
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
     new webpack.DefinePlugin({
      'process.env.NODE_ENV': '"production"'
     }),
@@ -97,7 +102,12 @@ var serverBuild = {
       },
       exclude: [/\.min\.js$/gi] // skip pre-minified libs
     })
-  ]
+  ],
+  watch: true,
+  watchOptions: {
+    aggregateTimeout: 300,
+    poll: 1000
+  }
 };
 
 module.exports = [

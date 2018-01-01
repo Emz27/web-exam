@@ -11,8 +11,7 @@ import {
 class LoginPage extends React.Component{
   constructor(props) {
     super(props);
-    this.handleUsernameChange = this.handleUsernameChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleTextChange = this.handleTextChange.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
     this.state = {
       username: '',
@@ -20,11 +19,8 @@ class LoginPage extends React.Component{
       isCorrect: true,
     }
   }
-  handleUsernameChange(event){
-    this.setState({username : event.target.value})
-  }
-  handlePasswordChange(event){
-    this.setState({password : event.target.value})
+  handleTextChange(input){
+    this.setState({...input});
   }
   handleLogin(event){
     var user = this;
@@ -38,6 +34,7 @@ class LoginPage extends React.Component{
       }
     })
     .done(function(data){
+      console.dir(data);
       data = JSON.parse(data);
       console.log(data);
       console.log(data.isLogged)
@@ -65,13 +62,21 @@ class LoginPage extends React.Component{
           type="text"
           placeholder="Username"
           value={this.state.username}
-          onChange={this.handleUsernameChange}
+          onChange={(event)=>{
+            var input ={};
+            input.username = event.target.value
+            this.handleTextChange(input)
+          }}
         />
         <input
           type="password"
           placeholder="Password"
           value={this.state.password}
-          onChange={this.handlePasswordChange}
+          onChange={(event)=>{
+            var input ={};
+            input.password = event.target.value
+            this.handleTextChange(input)
+          }}
         />
         <input type="submit" value="Submit" />
       </form>
