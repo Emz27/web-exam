@@ -165,16 +165,18 @@ class SubjectPage extends React.Component{
               />
               </label>
             </div>
-            <label>
-              Department
-            <select value={this.state.department} onChange={(event)=>{this.handleInputChange({department: event.target.value})}}>
-              {
-                this.state.departments.map((department,index)=>
-                  <option key={index} value={department.id}>{department.description}</option>
-                )
-              }
-            </select>
-            </label>
+            <div>
+              <label>
+                Department
+              <select value={this.state.department} onChange={(event)=>{this.handleInputChange({department: event.target.value})}}>
+                {
+                  this.state.departments.map((department,index)=>
+                    <option key={index} value={department.id}>{department.description}</option>
+                  )
+                }
+              </select>
+              </label>
+            </div>
             <button onClick={(event)=>{this.handleCancelButton(event);}}>
                 Cancel
             </button>
