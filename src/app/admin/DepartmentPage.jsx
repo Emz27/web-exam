@@ -170,4 +170,4 @@ class DepartmentPage extends React.Component{
     }
   }
 }
-export default DepartmentPage
+export {DepartmentPage}

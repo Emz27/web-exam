@@ -6,12 +6,12 @@ import {
   Link,
   Redirect
 } from 'react-router-dom'
-import HomePage from './HomePage.jsx'
-import DepartmentPage from './DepartmentPage.jsx'
-import ExamPage from './ExamPage.jsx'
-import QuestionPage from './QuestionPage.jsx'
-import SubjectPage from './SubjectPage.jsx'
-import UserPage from './UserPage.jsx'
+import {HomePage} from './HomePage.jsx'
+import {DepartmentPage} from './DepartmentPage.jsx'
+import {ExamPage} from './ExamPage.jsx'
+import {QuestionPage} from './QuestionPage.jsx'
+import {SubjectPage} from './SubjectPage.jsx'
+import {UserPage} from './UserPage.jsx'
 
 const MenuLink = ({ label, to }) => (
   <Route path={to} exact={true} children={
@@ -34,7 +34,7 @@ const NavBar = () => (
   </ul>
 )
 
-class MainPage extends React.Component{
+class AdminPage extends React.Component{
   constructor(props) {
     super(props);
   }
@@ -61,4 +61,4 @@ class MainPage extends React.Component{
   }
 }
 
-export default MainPage
+export {AdminPage}

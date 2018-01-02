@@ -210,4 +210,4 @@ class SubjectPage extends React.Component{
     }
   }
 }
-export default SubjectPage
+export {SubjectPage}

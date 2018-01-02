@@ -9,10 +9,10 @@ import {
 } from 'react-router-dom'
 import 'whatwg-fetch'
 
-import LoginPage from './LoginPage.jsx'
-import {default as AdminPage} from './admin/MainPage.jsx'
-import {default as TeacherPage} from './teacher/MainPage.jsx'
-import {default as StudentPage} from './student/MainPage.jsx'
+import {LoginPage} from './LoginPage.jsx'
+import {AdminPage} from './admin/MainPage.jsx'
+// import {TeacherPage} from './teacher/MainPage.jsx'
+// import {StudentPage} from './student/MainPage.jsx'
 
 const user = {
   isLogged: false,
@@ -91,20 +91,20 @@ class MainPage extends React.Component{
             <AdminPage logoutUser={this.logoutUser} />
           </div>
         )
-      case "2":
-        return (
-          <div>
-            <Router><Redirect to={'/'}/></Router>
-            <Teacherpage logoutUser={this.logoutUser} />
-          </div>
-        )
-      case "3":
-        return (
-          <div>
-            <Router><Redirect to={'/'}/></Router>
-            <StudentPage logoutUser={this.logoutUser} />
-          </div>
-        )
+      // case "2":
+      //   return (
+      //     <div>
+      //       <Router><Redirect to={'/'}/></Router>
+      //       <Teacherpage logoutUser={this.logoutUser} />
+      //     </div>
+      //   )
+      // case "3":
+      //   return (
+      //     <div>
+      //       <Router><Redirect to={'/'}/></Router>
+      //       <StudentPage logoutUser={this.logoutUser} />
+      //     </div>
+      //   )
       default:{
         // user not logged
         return (
