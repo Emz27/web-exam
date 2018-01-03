@@ -35,9 +35,9 @@
       $sql1 = "SELECT
                 q.id as question_id,
                 q.description as question_description,
-                q.subject as subject_id,
+                subject.id as subject_id,
                 subject.description as subject_description,
-                q.teacher as teacher_id,
+                user.id as teacher_id,
                 concat(user.firstname,' ',user.lastname) as teacher_name,
                 q.type as question_type_id,
                 question_type.description as question_type_description,
@@ -46,18 +46,22 @@
                 q.point as point,
                 question_type.option_limit as option_limit
                 from exam_question
-                left join question as q on question.id = exam_question.question
-                left join user on q.teacher = user.id
-                left join subject on q.subject = subject.id
+                left join question as q on q.id = exam_question.question
                 left join question_type on q.type = question_type.id
                 left join exam_type on q.exam_type = exam_type.id
+                left join teacher_subject on teacher_subject.id = q.teacher_subject
+                left join user on teacher_subject.teacher = user.id
+                left join subject on teacher_subject.subject = subject.id
                 where exam_question.exam = '".$row['exam_id']."'";
+
+      $result1 = $conn->query($sql1);
+      echo $conn->error;
       while($row1 = $result1->fetch_assoc()){
         $row1['question_options'] = array();
         $sql2 = "SELECT * from question_option where question=".$row1['question_id']."";
         $result2 = $conn->query($sql2);
         while($row2 = $result2->fetch_assoc()){
-          array_push($row['question_options'],$row2);
+          array_push($row1['question_options'],$row2);
         }
         array_push($row['exam_questions'],$row1);
       }

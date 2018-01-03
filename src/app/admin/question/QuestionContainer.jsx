@@ -11,7 +11,7 @@ import {QuestionTable} from './QuestionTable.jsx'
 
 
 const QuestionContainer = (props)=>{
-  if(props.parent.state.state_type == "Add" || props.parent.state.state_type == "Update"){
+  if(props.parent.state.question_state_type == "Add" || props.parent.state.question_state_type == "Update"){
     return (
       <QuestionAddEdit parent={props.parent} />
     )

@@ -7,7 +7,7 @@ import {
   Redirect
 } from 'react-router-dom'
 
-import {fetchSubject,fetchTeacher,fetchExamType,fetchQuestion,fetchQuestionType} from './fetch.jsx'
+import {fetchAvailableSubject,fetchSubject,fetchTeacher,fetchExamType,fetchQuestion,fetchQuestionType} from './fetch.jsx'
 import {emptyQuestion} from './emptyState.jsx'
 import {QuestionContainer} from './question/QuestionContainer.jsx'
 
@@ -15,8 +15,11 @@ class QuestionPage extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      state_type: 'View',
+      question_state_type: 'View',
       ...emptyQuestion,
+      exam_questions:[],
+
+      available_subjects:[],
       exam_types: [],
       teachers: [],
       subjects: [],
@@ -39,18 +42,17 @@ class QuestionPage extends React.Component{
     fetchTeacher(this);
     fetchQuestionType(this);
     fetchQuestion(this);
+    fetchAvailableSubject(this);
   }
   handleQuestionSubmitButton(event){
     event.preventDefault();
       if(!this.state.question_description)return;
-      if(!this.state.subject_id)return;
-      if(!this.state.teacher_id)return;
       if(!this.state.exam_type_id)return;
       if(!this.state.question_type_id)return;
       if(this.state.question_options.some((x)=>!x.description))return;
       if(!this.state.question_options.some((x)=>x.is_correct=="1"))return;
 
-      var mode = this.state.state_type=="Add"?"add":"update"
+      var mode = this.state.question_state_type=="Add"?"add":"update"
       console.dir(this.state);
       $.post({
         url: "/../api/admin/question/question_"+mode+".php",
@@ -61,9 +63,10 @@ class QuestionPage extends React.Component{
       .done((data)=>{
         console.dir(data);
         this.setState({
-          state_type: "View"
+          question_state_type: "View"
         });
         this.fetch();
+        console.dir(data);
       })
       .fail(function(xhr) {
           return alert("error in fetching session: "+ xhr);
@@ -72,7 +75,7 @@ class QuestionPage extends React.Component{
   handleQuestionCancelButton(event){
     event.preventDefault();
     this.setState({
-      state_type: "View"
+      question_state_type: "View"
     })
     this.fetch();
   }
@@ -98,14 +101,14 @@ class QuestionPage extends React.Component{
     }
   }
   handleQuestionUpdateButton(question){
-    question.state_type= "Update"
+    question.question_state_type= "Update"
     this.setState({
       ...question
     })
   }
   handleQuestionAddButton(question){
     this.setState({
-      state_type: 'Add',
+      question_state_type: 'Add',
       ...emptyQuestion
     })
   }

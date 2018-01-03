@@ -6,29 +6,32 @@ import {
   Link,
   Redirect
 } from 'react-router-dom'
-import {QuestionAddEdit} from './../question/QuestionAddEdit.jsx'
-import {QuestionTable} from './../question/QuestionTable.jsx'
+import {QuestionContainer} from './../question/QuestionContainer.jsx'
+import {ExamAddEdit} from './ExamAddEdit.jsx'
+import {ExamTable} from './ExamTable.jsx'
+import {ExamQuestion} from './ExamQuestion.jsx'
 
 
 const ExamContainer = (props)=>{
   var question_state_type = props.parent.state.question_state_type;
   var exam_state_type = props.parent.state.question_exam_type;
-  if(props.parent.state.state_type == "Add" || props.parent.state.state_type == "Update"){
+  if(props.parent.state.exam_state_type == "Add" || props.parent.state.exam_state_type == "Update"){
     return (
-      <QuestionAddEdit parent={props.parent} />
+        <div>
+          <div>
+            <ExamAddEdit parent={props.parent} />
+            <ExamQuestion parent={props.parent} />
+          </div>
+          <div>
+            <QuestionContainer parent={props.parent} />
+          </div>
+        </div>
     )
   }
   else {
     return (
       <div>
-      <button
-        onClick={(event)=>{
-          props.parent.handleQuestionAddButton();
-        }}
-        >
-          Add
-      </button>
-      <QuestionTable match={{ params: { id: 0 }, url: '/exam' }} parent={props.parent} />
+        <ExamTable parent={props.parent} />
       </div>
     )
   }

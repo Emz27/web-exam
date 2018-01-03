@@ -10,9 +10,9 @@
 
   $sql = "SELECT
             subject.description as subject_description,
-            subject.id as subject_subject,
-            concat(user.firstname,' ',user.lastname) as subject_teacher,
-            teacher_subject.id as subject_id
+            subject.id as subject_id,
+            concat(user.firstname,' ',user.lastname) as teacher_name,
+            teacher_subject.id as teacher_subject_id
             FROM teacher_subject
             inner join user on teacher_subject.teacher = user.id
             inner join subject on subject.id = teacher_subject.subject

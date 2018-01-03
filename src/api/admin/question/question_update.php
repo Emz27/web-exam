@@ -15,6 +15,7 @@
   $question_limit = isset($_POST['question_limit'])?$_POST['question_limit']:"";
   $point = isset($_POST['point'])?$_POST['point']:"";
   $question_options = isset($_POST['question_options'])?$_POST['question_options']:array();
+  $teacher_subject_id = isset($_POST['teacher_subject_id'])?$_POST['teacher_subject_id']:"";
   $temp = array();
   foreach($question_options as $value){
     array_push($temp,$value['description']);
@@ -27,7 +28,7 @@
   }
 
   $sql = "UPDATE `question` SET `description`='$question_description',
-      `subject`='$subject_id',`teacher`='$teacher_id',`type`='$question_type_id',
+      `teacher_subject`='$teacher_subject_id',`type`='$question_type_id',
       `exam_type`='$exam_type_id',`point`='$point'
       WHERE id='$question_id'";
   $conn->query($sql);

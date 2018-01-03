@@ -19,7 +19,7 @@ const emptyExam = {
   true_false_questions:[],
   identification_questions:[],
 
-  exam_questions:[]
+  exam_questions:[],
 }
 const emptyQuestion = {
   question_id:'',
@@ -28,13 +28,14 @@ const emptyQuestion = {
   subject_description: '',
   teacher_id: '',
   teacher_name: '',
+  teacher_subject_id:'',
   exam_type_id: '',
   exam_type_description:'',
   question_type_id: '',
   question_type_description:'',
   option_limit: 0,
   point: 1,
-  exam_questions: [],
+
   question_options: [],
 }
 const emptyUser= {
@@ -53,4 +54,4 @@ const emptyUser= {
   subject_teacher: [],
 }
 
-export {emptyQuestion,emptyUser}
+export {emptyQuestion,emptyUser,emptyExam}

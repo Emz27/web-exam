@@ -2,6 +2,7 @@
   include("../../config.php");
   session_start();
 
+  $exam_id = isset($_POST['exam_id'])?$_POST['exam_id']:"";
   $exam_description = isset($_POST['exam_description'])?$_POST['exam_description']:"";
   $exam_type_id = isset($_POST['exam_type_id'])?$_POST['exam_type_id']:"";
   $subject_id = isset($_POST['subject_id'])?$_POST['subject_id']:"";
@@ -44,10 +45,10 @@
 
     foreach ($exam_questions as $value){
       $sql = "INSERT INTO exam_question (exam,question)
-       SELECT * FROM (SELECT '$exam_id' as a, '$question_id' as b) AS tmp
+       SELECT * FROM (SELECT '$exam_id' as a, '".$value['question_id']."' as b) AS tmp
        WHERE NOT EXISTS (
            SELECT * FROM exam_question
-           WHERE question = '$question_id' and exam = '$exam_id'
+           WHERE question = '".$value['question_id']."' and exam = '$exam_id'
        )";
       $conn->query($sql);
       if($conn->error)echo $conn->error.' line 53';

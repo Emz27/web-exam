@@ -63,17 +63,14 @@ class ExamPage extends React.Component{
 
   handleExamSubmitButton(event){
     event.preventDefault();
-      if(!this.exam_description) return;
-      if(!this.exam_type_id) return;
-      if(!this.subject_id) return;
-      if(!this.teacher_subject_id) return;
-      if(!this.date_start) return;
-      if(!this.date_end) return;
-      if(!this.duration) return;
-      if(!this.total_item) return;
-      if(!this.total_point) return;
+      // if(!this.exam_description) return;
+      // if(!this.exam_type_id) return;
+      // if(!this.teacher_subject_id) return;
+      // if(!this.date_start) return;
+      // if(!this.date_end) return;
+      // if(!this.duration) return;
 
-      if(!this.exam_questions.length) return;
+      if(!this.state.exam_questions.length) return;
 
       var mode = this.state.exam_state_type=="Add"?"add":"update"
       console.dir(this.state);
@@ -120,12 +117,15 @@ class ExamPage extends React.Component{
     }
   }
   handleExamUpdateButton(exam){
+
     exam.exam_state_type= "Update"
+    console.dir(exam)
     this.setState({
       ...exam
     })
   }
   handleExamAddButton(exam){
+    console.dir(exam);
     this.setState({
       exam_state_type: 'Add',
       ...emptyExam
@@ -135,8 +135,6 @@ class ExamPage extends React.Component{
 handleQuestionSubmitButton(event){
   event.preventDefault();
     if(!this.state.question_description)return;
-    if(!this.state.subject_id)return;
-    if(!this.state.teacher_id)return;
     if(!this.state.exam_type_id)return;
     if(!this.state.question_type_id)return;
     if(this.state.question_options.some((x)=>!x.description))return;

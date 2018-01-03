@@ -14,14 +14,15 @@ import {TrueFalse} from './TrueFalse.jsx'
 const QuestionAddEdit =(props)=>(
 
 <div>
-  <form>
+  <form onSubmit={(event)=>{props.parent.handleQuestionSubmitButton(event);}}>
     <div>
       <label>
         Question Type
         {(()=>{
-            if(props.parent.state.state_type=="Add"){
+            if(props.parent.state.question_state_type=="Add"){
               return (
                 <select value={props.parent.state.question_type_id}
+                  required
                   onChange={(event)=>{
                     var description = props.parent.state.question_types.find(o => o.id == event.target.value).description;
                     var question_options =[];
@@ -47,6 +48,7 @@ const QuestionAddEdit =(props)=>(
     <div>
       <label>Description </label>
       <input type="text" placeholder="Description" value={props.parent.state.question_description}
+        required
         onChange={(event)=>{props.parent.handleInputChange({question_description: event.target.value})}}
       />
     </div>
@@ -54,26 +56,21 @@ const QuestionAddEdit =(props)=>(
       <label>
         Subject
         {(()=>{
-        // if(props.parent.state.subject_id==""){props.parent.state.subjects.some((item,index,array)=>{return props.parent.setState({subject_id:item.id})});}
-        return (
-          <select value={props.parent.state.subject_id} onChange={(event)=>{props.parent.handleInputChange({subject_id: event.target.value})}}>
-            <option value="" disabled></option>
-            {props.parent.state.subjects.map((q,i)=><option key={q.id} value={q.id}>{q.description}</option>)}
-          </select>
-        )
-        })()}
-      </label>
-    </div>
-    <div>
-      <label>
-        Author
-        {(()=>{
-        return (
-          <select value={props.parent.state.teacher_id} onChange={(event)=>{props.parent.handleInputChange({teacher_id: event.target.value})}}>
-            <option value="" disabled></option>
-            {props.parent.state.teachers.map((q,i)=><option key={q.id} value={q.id}>{q.teacher_name}</option>)}
-          </select>
-        )
+            if(props.parent.state.question_state_type=="Add"){
+              return (
+                <select value={props.parent.state.teacher_subject_id}
+                  required
+                  onChange={(event)=>{
+                    props.parent.handleInputChange({
+                      teacher_subject_id: event.target.value
+                    })
+                  }}>
+                  <option value="" disabled></option>
+                  {props.parent.state.available_subjects.map((q,i)=><option key={q.teacher_subject_id} value={q.teacher_subject_id}>{q.subject_description+" - "+q.teacher_name}</option>)}
+                </select>
+              )
+            }
+            else return (<div>{props.parent.state.subject_description+" - "+props.parent.state.teacher_name}</div>)
         })()}
       </label>
     </div>
@@ -82,7 +79,7 @@ const QuestionAddEdit =(props)=>(
         Exam Type
         {(()=>{
         return (
-          <select value={props.parent.state.exam_type_id} onChange={(event)=>{props.parent.handleInputChange({exam_type_id: event.target.value})}}>
+          <select required value={props.parent.state.exam_type_id} onChange={(event)=>{props.parent.handleInputChange({exam_type_id: event.target.value})}}>
             <option value="" disabled></option>
             {props.parent.state.exam_types.map((q,i)=><option key={q.id} value={q.id}>{q.description}</option>)}
           </select>
@@ -99,6 +96,8 @@ const QuestionAddEdit =(props)=>(
         onChange={(event)=>{
           if(event.target.value >0)props.parent.handleInputChange({point: event.target.value})
         }}
+        min={0}
+        required
       />
     </div>
     <div>
@@ -161,8 +160,8 @@ const QuestionAddEdit =(props)=>(
     <button onClick={(event)=>{props.parent.handleQuestionCancelButton(event);}}>
         Cancel
     </button>
-    <button type="submit" onClick={(event)=>{props.parent.handleQuestionSubmitButton(event);}}>
-        Submit
+    <button type="submit">
+        Submit Question
     </button>
   </form>
 </div>
