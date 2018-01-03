@@ -4,47 +4,46 @@ import {
   BrowserRouter as Router,
   Route,
   Link,
-  Redirect
+  Redirect,
+  Switch
 } from 'react-router-dom'
-import {QuestionAddEdit} from './question/QuestionAddEdit.jsx'
-import {QuestionTable} from './question/QuestionTable.jsx'
-import {fetchSubject,fetchTeacher,fetchExamType,fetchQuestion,fetchQuestionType} from './fetch.jsx'
 
-const emptyState = {
-  id:'',
-  description: '',
-  subject_id: '',
-  subject_description: '',
-  teacher_id: '',
-  teacher_name: '',
-  exam_type_id: '',
-  exam_type_description:'',
-  question_type_id: '',
-  question_type_description:'',
-  option_limit: 0,
-  point: 1,
-  question_options: [],
-}
+import {QuestionContainer} from './question/QuestionContainer.jsx'
+import {ExamContainer} from './exam/ExamContainer.jsx'
+import {ExamTable} from './exam/ExamTable.jsx'
+import {fetchExam,fetchSubject,fetchTeacher,fetchExamType,fetchQuestion,fetchQuestionType,fetchAvailableSubject} from './fetch.jsx'
+import {emptyQuestion,emptyExam} from './emptyState.jsx'
+
 class ExamPage extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      state_type: 'View',
+      exam_state_type: 'View',
+      question_state_type: 'View',
+      ...emptyQuestion,
+      ...emptyExam,
 
-      ...emptyState,
-
+      exams:[],
       exam_types: [],
       teachers: [],
       subjects: [],
+      available_subjects:[],
       question_types:[],
       questions:[]
     }
     this.handleInputChange = this.handleInputChange.bind(this)
-    this.handleDeleteButton = this.handleDeleteButton.bind(this)
-    this.handleUpdateButton = this.handleUpdateButton.bind(this)
-    this.handleAddButton = this.handleAddButton.bind(this)
-    this.handleCancelButton = this.handleCancelButton.bind(this)
-    this.handleSubmitButton = this.handleSubmitButton.bind(this)
+
+    this.handleExamDeleteButton = this.handleExamDeleteButton.bind(this)
+    this.handleExamUpdateButton = this.handleExamUpdateButton.bind(this)
+    this.handleExamAddButton = this.handleExamAddButton.bind(this)
+    this.handleExamCancelButton = this.handleExamCancelButton.bind(this)
+    this.handleExamSubmitButton = this.handleExamSubmitButton.bind(this)
+
+    this.handleQuestionDeleteButton = this.handleQuestionDeleteButton.bind(this)
+    this.handleQuestionUpdateButton = this.handleQuestionUpdateButton.bind(this)
+    this.handleQuestionAddButton = this.handleQuestionAddButton.bind(this)
+    this.handleQuestionCancelButton = this.handleQuestionCancelButton.bind(this)
+    this.handleQuestionSubmitButton = this.handleQuestionSubmitButton.bind(this)
   }
   componentDidMount() {
       this.fetch()
@@ -55,21 +54,31 @@ class ExamPage extends React.Component{
     fetchTeacher(this);
     fetchQuestionType(this);
     fetchQuestion(this);
+    fetchExam(this);
+    fetchAvailableSubject(this);
   }
-  handleSubmitButton(event){
-    event.preventDefault();
-      if(!this.state.description)return;
-      if(!this.state.subject_id)return;
-      if(!this.state.teacher_id)return;
-      if(!this.state.exam_type_id)return;
-      if(!this.state.question_type_id)return;
-      if(this.state.question_options.some((x)=>!x.description))return;
-      if(!this.state.question_options.some((x)=>x.is_correct=="1"))return;
+  handleInputChange(input){
+    this.setState({...input});
+  }
 
-      var mode = this.state.state_type=="Add"?"add":"update"
+  handleExamSubmitButton(event){
+    event.preventDefault();
+      if(!this.exam_description) return;
+      if(!this.exam_type_id) return;
+      if(!this.subject_id) return;
+      if(!this.teacher_subject_id) return;
+      if(!this.date_start) return;
+      if(!this.date_end) return;
+      if(!this.duration) return;
+      if(!this.total_item) return;
+      if(!this.total_point) return;
+
+      if(!this.exam_questions.length) return;
+
+      var mode = this.state.exam_state_type=="Add"?"add":"update"
       console.dir(this.state);
-      $.get({
-        url: "../api/admin/question/question_"+mode+".php",
+      $.post({
+        url: "/../api/admin/exam/exam_"+mode+".php",
         data: {
           ...this.state
         }
@@ -77,7 +86,7 @@ class ExamPage extends React.Component{
       .done((data)=>{
         console.dir(data);
         this.setState({
-          state_type: "View"
+          exam_state_type: "View"
         });
         this.fetch();
       })
@@ -85,22 +94,19 @@ class ExamPage extends React.Component{
           return alert("error in fetching session: "+ xhr);
       });
   }
-  handleCancelButton(event){
+  handleExamCancelButton(event){
     event.preventDefault();
     this.setState({
-      state_type: "View"
+      exam_state_type: "View"
     })
     this.fetch();
   }
-  handleInputChange(input){
-    this.setState({...input});
-  }
-  handleDeleteButton(id){
+  handleExamDeleteButton(id){
     if (confirm("Are You Sure you Want to delete the user?") == true) {
-      $.get({
-        url: "../api/admin/question/question_delete.php",
+      $.post({
+        url: "/../api/admin/exam/exam_delete.php",
         data: {
-          id: id
+          exam_id: id
         }
       })
       .done((data)=>{
@@ -113,41 +119,94 @@ class ExamPage extends React.Component{
 
     }
   }
-  handleUpdateButton(question){
-    question.state_type= "Update"
+  handleExamUpdateButton(exam){
+    exam.exam_state_type= "Update"
     this.setState({
-      ...question
+      ...exam
     })
   }
-  handleAddButton(question){
+  handleExamAddButton(exam){
     this.setState({
-      state_type: 'Add',
-      ...emptyState
+      exam_state_type: 'Add',
+      ...emptyExam
     })
   }
-  render(){
-    if(this.state.state_type == "Add" || this.state.state_type == "Update"){
-      return (
-        <QuestionAddEdit parent={this} />
-      )
-    }
-    else {
-      return (
-        <div>
-        <button
-          onClick={(event)=>{
-            this.handleAddButton();
-          }}
-          >
-            Add
-        </button>
-        <QuestionTable parent={this} />
-        </div>
-      )
-    }
+/////////////////////////////////////////
+handleQuestionSubmitButton(event){
+  event.preventDefault();
+    if(!this.state.question_description)return;
+    if(!this.state.subject_id)return;
+    if(!this.state.teacher_id)return;
+    if(!this.state.exam_type_id)return;
+    if(!this.state.question_type_id)return;
+    if(this.state.question_options.some((x)=>!x.description))return;
+    if(!this.state.question_options.some((x)=>x.is_correct=="1"))return;
+
+    var mode = this.state.question_state_type=="Add"?"add":"update"
+    console.dir(this.state);
+    $.post({
+      url: "/../api/admin/question/question_"+mode+".php",
+      data: {
+        ...this.state
+      }
+    })
+    .done((data)=>{
+      console.dir(data);
+      this.setState({
+        question_state_type: "View"
+      });
+      this.fetch();
+    })
+    .fail(function(xhr) {
+        return alert("error in fetching session: "+ xhr);
+    });
+}
+handleQuestionCancelButton(event){
+  event.preventDefault();
+  this.setState({
+    question_state_type: "View"
+  })
+  this.fetch();
+}
+handleQuestionDeleteButton(id){
+  if (confirm("Are You Sure you Want to delete the user?") == true) {
+    $.post({
+      url: "/../api/admin/question/question_delete.php",
+      data: {
+        question_id: id
+      }
+    })
+    .done((data)=>{
+      this.fetch();
+    })
+    .fail(function(xhr) {
+        return alert("error: "+ xhr);
+    });
+  } else {
+
   }
+}
+handleQuestionUpdateButton(question){
+  question.question_state_type= "Update"
+  this.setState({
+    ...question
+  })
+}
+handleQuestionAddButton(question){
+  this.setState({
+    question_state_type: 'Add',
+    ...emptyQuestion
+  })
 }
 
 
+  render(){
+    return (
+      <div>
+        <ExamContainer parent={this} />
+      </div>
+    )
+  }
+}
 
 export {ExamPage}

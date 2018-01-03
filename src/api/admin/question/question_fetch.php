@@ -4,12 +4,14 @@
 
   $conn = new mysqli($db_host, $db_username, $db_password, $db_name);
 
+  $fetch_filter = isset($_POST['fetch_filter'])?$_POST['fetch_filter']:"";
+
   if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
   }
   $sql = "SELECT
-            q.id as id,
-            q.description as description,
+            q.id as question_id,
+            q.description as question_description,
             q.subject as subject_id,
             subject.description as subject_description,
             q.teacher as teacher_id,
@@ -24,14 +26,16 @@
             left join user on q.teacher = user.id
             left join subject on q.subject = subject.id
             left join question_type on q.type = question_type.id
-            left join exam_type on q.exam_type = exam_type.id";
+            left join exam_type on q.exam_type = exam_type.id
+
+            $fetch_filter";
   $data = array();
   $result = $conn->query($sql);
   echo $conn->error;
   if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()){
       $row['question_options'] = array();
-      $result1 = $conn->query("SELECT * from question_option where question=".$row['id']."");
+      $result1 = $conn->query("SELECT * from question_option where question=".$row['question_id']."");
       while($row1 = $result1->fetch_assoc()){
         array_push($row['question_options'],$row1);
       }

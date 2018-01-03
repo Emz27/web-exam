@@ -29,7 +29,7 @@ class DepartmentPage extends React.Component{
       this.fetchDepartment();
   }
   fetchDepartment(){
-      $.get("../api/admin/department/department_fetch.php")
+      $.post("/../api/admin/department/department_fetch.php")
       .done((data)=>{
         var data = JSON.parse(data);
 
@@ -45,8 +45,8 @@ class DepartmentPage extends React.Component{
     event.preventDefault();
       var mode = this.state.state_type=="Add"?"add":"update"
       console.dir(this.state);
-      $.get({
-        url: "../api/admin/department/department_"+mode+".php",
+      $.post({
+        url: "/../api/admin/department/department_"+mode+".php",
         data: {
           id: this.state.id,
           description: this.state.description
@@ -74,8 +74,8 @@ class DepartmentPage extends React.Component{
   }
   handleDeleteButton(id){
     if (confirm("Are You Sure you Want to delete the user?") == true) {
-      $.get({
-        url: "../api/admin/department/department_delete.php",
+      $.post({
+        url: "/../api/admin/department/department_delete.php",
         data: {
           id: id
         }

@@ -6,10 +6,10 @@ import {
   Link,
   Redirect
 } from 'react-router-dom'
-import {QuestionAddEdit} from './question/QuestionAddEdit.jsx'
-import {QuestionTable} from './question/QuestionTable.jsx'
+
 import {fetchSubject,fetchTeacher,fetchExamType,fetchQuestion,fetchQuestionType} from './fetch.jsx'
 import {emptyQuestion} from './emptyState.jsx'
+import {QuestionContainer} from './question/QuestionContainer.jsx'
 
 class QuestionPage extends React.Component{
   constructor(props) {
@@ -24,11 +24,11 @@ class QuestionPage extends React.Component{
       questions:[]
     }
     this.handleInputChange = this.handleInputChange.bind(this)
-    this.handleDeleteButton = this.handleDeleteButton.bind(this)
-    this.handleUpdateButton = this.handleUpdateButton.bind(this)
-    this.handleAddButton = this.handleAddButton.bind(this)
-    this.handleCancelButton = this.handleCancelButton.bind(this)
-    this.handleSubmitButton = this.handleSubmitButton.bind(this)
+    this.handleQuestionDeleteButton = this.handleQuestionDeleteButton.bind(this)
+    this.handleQuestionUpdateButton = this.handleQuestionUpdateButton.bind(this)
+    this.handleQuestionAddButton = this.handleQuestionAddButton.bind(this)
+    this.handleQuestionCancelButton = this.handleQuestionCancelButton.bind(this)
+    this.handleQuestionSubmitButton = this.handleQuestionSubmitButton.bind(this)
   }
   componentDidMount() {
       this.fetch()
@@ -40,9 +40,9 @@ class QuestionPage extends React.Component{
     fetchQuestionType(this);
     fetchQuestion(this);
   }
-  handleSubmitButton(event){
+  handleQuestionSubmitButton(event){
     event.preventDefault();
-      if(!this.state.description)return;
+      if(!this.state.question_description)return;
       if(!this.state.subject_id)return;
       if(!this.state.teacher_id)return;
       if(!this.state.exam_type_id)return;
@@ -52,8 +52,8 @@ class QuestionPage extends React.Component{
 
       var mode = this.state.state_type=="Add"?"add":"update"
       console.dir(this.state);
-      $.get({
-        url: "../api/admin/question/question_"+mode+".php",
+      $.post({
+        url: "/../api/admin/question/question_"+mode+".php",
         data: {
           ...this.state
         }
@@ -69,7 +69,7 @@ class QuestionPage extends React.Component{
           return alert("error in fetching session: "+ xhr);
       });
   }
-  handleCancelButton(event){
+  handleQuestionCancelButton(event){
     event.preventDefault();
     this.setState({
       state_type: "View"
@@ -79,12 +79,12 @@ class QuestionPage extends React.Component{
   handleInputChange(input){
     this.setState({...input});
   }
-  handleDeleteButton(id){
+  handleQuestionDeleteButton(id){
     if (confirm("Are You Sure you Want to delete the user?") == true) {
-      $.get({
-        url: "../api/admin/question/question_delete.php",
+      $.post({
+        url: "/../api/admin/question/question_delete.php",
         data: {
-          id: id
+          question_id: id
         }
       })
       .done((data)=>{
@@ -97,38 +97,22 @@ class QuestionPage extends React.Component{
 
     }
   }
-  handleUpdateButton(question){
+  handleQuestionUpdateButton(question){
     question.state_type= "Update"
     this.setState({
       ...question
     })
   }
-  handleAddButton(question){
+  handleQuestionAddButton(question){
     this.setState({
       state_type: 'Add',
       ...emptyQuestion
     })
   }
   render(){
-    if(this.state.state_type == "Add" || this.state.state_type == "Update"){
-      return (
-        <QuestionAddEdit parent={this} />
-      )
-    }
-    else {
-      return (
-        <div>
-        <button
-          onClick={(event)=>{
-            this.handleAddButton();
-          }}
-          >
-            Add
-        </button>
-        <QuestionTable parent={this} />
-        </div>
-      )
-    }
+    return (
+      <QuestionContainer parent={this} />
+    )
   }
 }
 export {QuestionPage}

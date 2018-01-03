@@ -25,8 +25,8 @@ const user = {
 }
 // get user session
 $.ajax({
-  url: "../api/session.php",
-  method: "GET",
+  url: "/../api/session.php",
+  method: "POST",
 })
 .done(function(data){
   data = JSON.parse(data);
@@ -64,8 +64,8 @@ class MainPage extends React.Component{
   logoutUser(){
     var user = this;
     $.ajax({
-      url: "../api/logout.php",
-      method: "GET",
+      url: "/../api/logout.php",
+      method: "POST",
     })
     .done(function(data){
       user.setState({
@@ -87,7 +87,6 @@ class MainPage extends React.Component{
       case "1":
         return (
           <div>
-            <Router><Redirect to={'/'}/></Router>
             <AdminPage logoutUser={this.logoutUser} />
           </div>
         )
@@ -109,7 +108,6 @@ class MainPage extends React.Component{
         // user not logged
         return (
           <div>
-              <Router><Redirect to={'/login'}/></Router>
               <LoginPage loginUser={this.loginUser} user={this.state} />
           </div>
         )

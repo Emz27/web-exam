@@ -1,6 +1,29 @@
+const emptyExam = {
+  exam_id:'',
+  exam_description:'',
+  exam_type_id:'',
+  exam_type_description:'',
+  subject_id:'',
+  subject_description:'',
+  teacher_subject_id:'',
+  teacher_id:'',
+  teacher_name:'',
+  date_start:'',
+  date_end:'',
+  duration:'',
+  total_item:'',
+  total_point:'',
+
+  enumeration_questions:[],
+  multiple_choice_questions:[],
+  true_false_questions:[],
+  identification_questions:[],
+
+  exam_questions:[]
+}
 const emptyQuestion = {
-  id:'',
-  description: '',
+  question_id:'',
+  question_description: '',
   subject_id: '',
   subject_description: '',
   teacher_id: '',
@@ -11,6 +34,7 @@ const emptyQuestion = {
   question_type_description:'',
   option_limit: 0,
   point: 1,
+  exam_questions: [],
   question_options: [],
 }
 const emptyUser= {

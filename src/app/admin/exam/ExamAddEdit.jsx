@@ -1,4 +1,4 @@
-import React from 'react'
+examimport React from 'react'
 import ReactDOM from 'react-dom'
 import {
   BrowserRouter as Router,
@@ -10,44 +10,41 @@ import {MultipleChoice} from './MultipleChoice.jsx'
 import {Enumeration} from './Enumeration.jsx'
 import {Identification} from './Identification.jsx'
 import {TrueFalse} from './TrueFalse.jsx'
+import {fetchQuestion} from './../fetch.jsx'
 
-const QuestionAddEdit =(props)=>(
+const ExamAddEdit =(props)=>(
 
 <div>
   <form>
     <div>
       <label>
-        Question Type
+        Exam Type
         {(()=>{
-            if(props.parent.state.state_type=="Add"){
+            if(props.parent.state.exam_state_type=="Add"){
               return (
-                <select value={props.parent.state.question_type_id}
+                <select value={props.parent.state.teacher_subject_id}
                   onChange={(event)=>{
-                    var description = props.parent.state.question_types.find(o => o.id == event.target.value).description;
-                    var question_options =[];
-                    if(description == "True or False"){
-                      question_options.push({description: "true",is_correct: 1});
-                      question_options.push({description: "false",is_correct: 0});
-                    }
                     props.parent.handleInputChange({
-                      question_type_id: event.target.value,
-                      question_type_description: description,
-                      question_options: question_options
+                      teacher_subject_id: event.target.value,
                     })
+                    props.parent.setState({
+                      fetch_filter: `where `
+                    })
+                    fetchQuestion(props.parent);
                   }}>
                   <option value="" disabled></option>
-                  {props.parent.state.question_types.map((q,i)=><option key={q.id} value={q.id}>{q.description}</option>)}
+                  {props.parent.state.exam_types.map((q,i)=><option key={q.id} value={q.id}>{q.description}</option>)}
                 </select>
               )
             }
-            else return (<div>{props.parent.state.question_type_description}</div>)
+            else return (<div>{props.parent.state.exam_type_description}</div>)
         })()}
       </label>
     </div>
     <div>
       <label>Description </label>
-      <input type="text" placeholder="Description" value={props.parent.state.question_description}
-        onChange={(event)=>{props.parent.handleInputChange({question_description: event.target.value})}}
+      <input type="text" placeholder="Description" value={props.parent.state.exam_description}
+        onChange={(event)=>{props.parent.handleInputChange({exam_description: event.target.value})}}
       />
     </div>
     <div>
@@ -106,26 +103,26 @@ const QuestionAddEdit =(props)=>(
         Choices
         {
           (()=>{
-            var type_description = props.parent.state.question_type_description;
+            var type_description = props.parent.state.exam_type_description;
             var input;
             if(type_description == "Multiple Choice"){
-              input = props.parent.state.question_options.map((item,index)=>
-                <MultipleChoice key={item.id} parent={props.parent} value={item.description} index={index} question_options={props.parent.state.question_options.slice()} />
+              input = props.parent.state.exam_options.map((item,index)=>
+                <MultipleChoice key={item.id} parent={props.parent} value={item.description} index={index} exam_options={props.parent.state.exam_options.slice()} />
               )
             }
             else if(type_description == "Identification"){
-              input = props.parent.state.question_options.map((item,index)=>
-                <Identification key={item.id} parent={props.parent} value={item.description} index={index} question_options={props.parent.state.question_options.slice()} />
+              input = props.parent.state.exam_options.map((item,index)=>
+                <Identification key={item.id} parent={props.parent} value={item.description} index={index} exam_options={props.parent.state.exam_options.slice()} />
               )
             }
             else if(type_description == "Enumeration"){
-              input = props.parent.state.question_options.map((item,index)=>
-                <Enumeration key={item.id} parent={props.parent} value={item.description} index={index} question_options={props.parent.state.question_options.slice()} />
+              input = props.parent.state.exam_options.map((item,index)=>
+                <Enumeration key={item.id} parent={props.parent} value={item.description} index={index} exam_options={props.parent.state.exam_options.slice()} />
               )
             }
             else if(type_description == "True or False"){
-              input = props.parent.state.question_options.map((item,index)=>
-                <TrueFalse key={item.id} parent={props.parent} value={item.description} index={index} question_options={props.parent.state.question_options.slice()} />
+              input = props.parent.state.exam_options.map((item,index)=>
+                <TrueFalse key={item.id} parent={props.parent} value={item.description} index={index} exam_options={props.parent.state.exam_options.slice()} />
               )
             }
             return (
@@ -141,11 +138,11 @@ const QuestionAddEdit =(props)=>(
                   if(type_description == "Identification" || type_description == "Enumeration"){add.is_correct = "1"}
                   if(+props.parent.state.option_limit != 0){
                     var limit = +props.parent.state.option_limit;
-                    if(props.parent.state.question_options.length <= limit){
-                      props.parent.handleInputChange({question_options:[...props.parent.state.question_options,add]});
+                    if(props.parent.state.exam_options.length <= limit){
+                      props.parent.handleInputChange({exam_options:[...props.parent.state.exam_options,add]});
                     }
                   }
-                  else props.parent.handleInputChange({question_options:[...props.parent.state.question_options,add]});
+                  else props.parent.handleInputChange({exam_options:[...props.parent.state.exam_options,add]});
                   }}>
                     +
                 </button>
@@ -158,14 +155,14 @@ const QuestionAddEdit =(props)=>(
         }
       </label>
     </div>
-    <button onClick={(event)=>{props.parent.handleQuestionCancelButton(event);}}>
+    <button onClick={(event)=>{props.parent.handleCancelButton(event);}}>
         Cancel
     </button>
-    <button type="submit" onClick={(event)=>{props.parent.handleQuestionSubmitButton(event);}}>
+    <button type="submit" onClick={(event)=>{props.parent.handleExamSubmitButton(event);}}>
         Submit
     </button>
   </form>
 </div>
 )
 
-export {QuestionAddEdit}
+export {examAddEdit}

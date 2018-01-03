@@ -8,9 +8,9 @@
     die("Connection failed: " . $conn->connect_error);
   }
 
-  $id = $_POST['id'];
+  $id = $_POST['exam_id'];
 
-  $sql = "DELETE from department where id = $id";
+  $sql = "DELETE from exam where id = $id";
   $conn->query($sql);
   $conn->close();
 

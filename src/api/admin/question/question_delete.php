@@ -8,7 +8,7 @@
     die("Connection failed: " . $conn->connect_error);
   }
 
-  $id = $_GET['id'];
+  $id = $_POST['question_id'];
 
   $sql = "DELETE from question where id = $id";
   $conn->query($sql);

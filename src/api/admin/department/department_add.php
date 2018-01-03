@@ -1,7 +1,7 @@
 <?php
   include("../../config.php");
   session_start();
-  $description = isset($_GET['description'])?$_GET['description']:"";
+  $description = isset($_POST['description'])?$_POST['description']:"";
 
 
   $conn = new mysqli($db_host, $db_username, $db_password, $db_name);

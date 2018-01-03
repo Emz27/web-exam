@@ -2,8 +2,8 @@
   include("config.php");
   session_start();
 
-  $username = $_GET['username'];
-  $password = $_GET['password'];
+  $username = $_POST['username'];
+  $password = $_POST['password'];
 
   $data['id'] = -1;
   $data['type'] = -1;

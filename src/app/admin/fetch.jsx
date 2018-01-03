@@ -1,9 +1,43 @@
-
-const fetchSubject = (props)=>{
-    $.get("../api/admin/subject/subject_fetch.php")
+const fetchExam = (props)=>{
+    $.post({
+      url: "/../api/admin/exam/exam_fetch.php",
+      data:{fetch_filter:props.state.fetch_filter}
+    })
     .done((data)=>{
       var data = JSON.parse(data);
-
+      // console.dir(data)
+      var result={};
+      result.exams = data;
+      props.setState({...result});
+    })
+    .fail(function(xhr) {
+        return alert("error in fetching session: "+ xhr);
+    });
+}
+const fetchAvailableSubject = (props)=>{
+    $.post({
+      url: "/../api/admin/subject/available_subject_fetch.php",
+      data:{fetch_filter:props.state.fetch_filter}
+    })
+    .done((data)=>{
+      var data = JSON.parse(data);
+      // console.dir(data)
+      var result={};
+      result.available_subjects = data;
+      props.setState({...result});
+    })
+    .fail(function(xhr) {
+        return alert("error in fetching session: "+ xhr);
+    });
+}
+const fetchSubject = (props)=>{
+    $.post({
+      url: "/../api/admin/subject/subject_fetch.php",
+      data:{fetch_filter:props.state.fetch_filter}
+    })
+    .done((data)=>{
+      var data = JSON.parse(data);
+      // console.dir(data)
       var result={};
       result.subjects = data;
       props.setState({...result});
@@ -13,10 +47,13 @@ const fetchSubject = (props)=>{
     });
 }
 const fetchExamType = (props)=>{
-    $.get("../api/admin/exam_type/exam_type_fetch.php")
+    $.post({
+      url: "/../api/admin/exam_type/exam_type_fetch.php",
+      data:{fetch_filter:props.state.fetch_filter}
+    })
     .done((data)=>{
       var data = JSON.parse(data);
-
+      // console.dir(data)
       var result={};
       result.exam_types = data;
       props.setState({...result});
@@ -26,10 +63,13 @@ const fetchExamType = (props)=>{
     });
 }
 const fetchTeacher = (props)=>{
-    $.get("../api/admin/teacher/teacher_fetch.php")
+    $.post({
+      url: "/../api/admin/teacher/teacher_fetch.php",
+      data:{fetch_filter:props.state.fetch_filter}
+    })
     .done((data)=>{
       var data = JSON.parse(data);
-
+      // console.dir(data)
       var result={};
       result.teachers = data;
       props.setState({...result});
@@ -39,10 +79,13 @@ const fetchTeacher = (props)=>{
     });
 }
 const fetchQuestionType = (props)=>{
-    $.get("../api/admin/question_type/question_type_fetch.php")
+    $.post({
+      url: "/../api/admin/question_type/question_type_fetch.php",
+      data:{fetch_filter:props.state.fetch_filter}
+    })
     .done((data)=>{
       var data = JSON.parse(data);
-
+      // console.dir(data)
       var result={};
       result.question_types = data;
       props.setState({...result});
@@ -52,10 +95,13 @@ const fetchQuestionType = (props)=>{
     });
 }
 const fetchQuestion = (props)=>{
-    $.get("../api/admin/question/question_fetch.php")
+    $.post({
+      url: "/../api/admin/question/question_fetch.php",
+      data:{fetch_filter:props.state.fetch_filter}
+    })
     .done((data)=>{
       var data = JSON.parse(data);
-
+      // console.dir(data)
       var result={};
       result.questions = data;
       props.setState({...result});
@@ -65,4 +111,12 @@ const fetchQuestion = (props)=>{
     });
 }
 
-export {fetchSubject,fetchTeacher,fetchExamType,fetchQuestion,fetchQuestionType}
+export {
+  fetchSubject,
+  fetchTeacher,
+  fetchExamType,
+  fetchQuestion,
+  fetchQuestionType,
+  fetchAvailableSubject,
+  fetchExam
+}

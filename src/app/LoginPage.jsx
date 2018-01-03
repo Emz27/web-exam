@@ -26,8 +26,8 @@ class LoginPage extends React.Component{
     var user = this;
 
     $.ajax({
-      url: "../api/login.php",
-      method: "GET",
+      url: "/../api/login.php",
+      method: "POST",
       data: {
         username: user.state.username,
         password: user.state.password

@@ -1,9 +1,9 @@
 <?php
   include("../../config.php");
   session_start();
-  $id = isset($_GET['id'])?$_GET['id']:"";
-  $description = isset($_GET['description'])?$_GET['description']:"";
-  $department = isset($_GET['department'])?$_GET['department']:"";
+  $id = isset($_POST['id'])?$_POST['id']:"";
+  $description = isset($_POST['description'])?$_POST['description']:"";
+  $department = isset($_POST['department'])?$_POST['department']:"";
 
   $conn = new mysqli($db_host, $db_username, $db_password, $db_name);
 

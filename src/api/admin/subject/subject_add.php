@@ -1,8 +1,8 @@
 <?php
   include("../../config.php");
   session_start();
-  $description = isset($_GET['description'])?$_GET['description']:"";
-  $department = isset($_GET['department'])?$_GET['department']:"";
+  $description = isset($_POST['description'])?$_POST['description']:"";
+  $department = isset($_POST['department'])?$_POST['department']:"";
 
 
   $conn = new mysqli($db_host, $db_username, $db_password, $db_name);

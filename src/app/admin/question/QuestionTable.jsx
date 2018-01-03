@@ -10,10 +10,33 @@ import {
 
 
 const QuestionTable = (props)=>{
-  const items = props.parent.state.questions.map((q,index)=>(
-    <tr key={q.id}>
+  const items = props.parent.state.questions.filter((item)=>{
+          if(props.parent.state.exam_questions.some((i)=>i.question_id == item.question_id))return false;
+          return true;
+        }).map((q,index)=>
+        (
+    <tr key={q.question_id}>
+      {
+        <Route path={props.match.url+"/exams"} render={()=>{
+            return (
+              <td>
+              <button
+                onClick={
+                  (event)=>{
+                    props.parent.setState({
+                      exam_questions: [...props.parent.state.exam_questions,{...q}],
+                    })
+                  }
+                }>
+                +
+              </button>
+              </td>
+            )
+          }
+        } />
+      }
       <td>{index+1}</td>
-      <td>{q.description}</td>
+      <td>{q.question_description}</td>
       <td>{q.subject_description}</td>
       <td>{q.teacher_name}</td>
       <td>{q.question_type_description}</td>
@@ -23,14 +46,14 @@ const QuestionTable = (props)=>{
       <td>
         <button
           onClick={(event)=>{
-            props.parent.handleUpdateButton(q);
+            props.parent.handleQuestionUpdateButton(q);
           }}
           >
             Update
         </button>
         <button
           onClick={(event)=>{
-            props.parent.handleDeleteButton(q.id);
+            props.parent.handleQuestionDeleteButton(q.question_id);
           }}
           >
             Delete
@@ -41,6 +64,7 @@ const QuestionTable = (props)=>{
   return (
     <table>
       <tr>
+        <Route path={props.match.url+"/exams"} render={()=><th> </th>} />
         <th>#</th>
         <th>Description</th>
         <th>Subject</th>

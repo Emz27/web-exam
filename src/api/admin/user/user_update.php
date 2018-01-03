@@ -1,15 +1,15 @@
 <?php
   include("../../config.php");
   session_start();
-  $id = isset($_GET['id'])?$_GET['id']:"";
-  $username = isset($_GET['username'])?$_GET['username']:"";
-  $password = isset($_GET['password'])?$_GET['password']:"";
-  $firstname = isset($_GET['firstname'])?$_GET['firstname']:"";
-  $lastname = isset($_GET['lastname'])?$_GET['lastname']:"";
-  $middlename = isset($_GET['middlename'])?$_GET['middlename']:"";
-  $type = isset($_GET['type'])?$_GET['type']:"";
-  $subject_subject = isset($_GET['subject_subject'])?$_GET['subject_subject']:array();
-  $subject_id = isset($_GET['subject_id'])?$_GET['subject_id']:array();
+  $id = isset($_POST['id'])?$_POST['id']:"";
+  $username = isset($_POST['username'])?$_POST['username']:"";
+  $password = isset($_POST['password'])?$_POST['password']:"";
+  $firstname = isset($_POST['firstname'])?$_POST['firstname']:"";
+  $lastname = isset($_POST['lastname'])?$_POST['lastname']:"";
+  $middlename = isset($_POST['middlename'])?$_POST['middlename']:"";
+  $type = isset($_POST['type'])?$_POST['type']:"";
+  $subject_subject = isset($_POST['subject_subject'])?$_POST['subject_subject']:array();
+  $subject_id = isset($_POST['subject_id'])?$_POST['subject_id']:array();
 
   $conn = new mysqli($db_host, $db_username, $db_password, $db_name);
 
