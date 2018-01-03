@@ -80,7 +80,22 @@ class LoginPage extends React.Component{
         />
         <input type="submit" value="Submit" />
       </form>
+      <br />
+      <br />
+      <br />
+      Progress: 60% as of 4:30 AM January 4, 2018<br/>
+      Features:<br/>
+        #Account System<br/>
+        - username and password credentials are required to use the service<br/>
+        #Admin System<br/>
+        - create/update/delete/view user,subject,department,question,exam data<br/>
+
+      Work in progress features:<br/>
+        - student incoming exam table<br/>
+        - student examination sheet<br/>
+        - student exam history<br/>
       </div>
+
       </Router>
     )
   }
