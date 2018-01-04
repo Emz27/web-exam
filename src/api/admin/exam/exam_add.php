@@ -5,10 +5,10 @@
   $exam_description = isset($_POST['exam_description'])?$_POST['exam_description']:"";
   $exam_type_id = isset($_POST['exam_type_id'])?$_POST['exam_type_id']:"";
   $subject_id = isset($_POST['subject_id'])?$_POST['subject_id']:"";
-  $teacher_subject_id = isset($_POST['teacher_subject_id'])?$_POST['teacher_subject_id']:"";
+  $exam_teacher_subject_id = isset($_POST['exam_teacher_subject_id'])?$_POST['exam_teacher_subject_id']:"";
   $teacher_id = isset($_POST['teacher_id'])?$_POST['teacher_id']:"";
-  $date_start = isset($_POST['date_start'])?$_POST['date_start']:"";
-  $date_end = isset($_POST['date_end'])?$_POST['date_end']:"";
+  $date_start = isset($_POST['date_start'])?str_replace("T"," ",$_POST['date_start']):"";
+  $date_end = isset($_POST['date_end'])?str_replace("T"," ",$_POST['date_end']):"";
   $duration = isset($_POST['duration'])?$_POST['duration']:"";
 
   $exam_questions = isset($_POST['exam_questions'])?$_POST['exam_questions']:"";
@@ -20,7 +20,7 @@
   }
 
   $sql = "INSERT INTO `exam`(`description`, `type`, `teacher_subject`, `date_start`, `date_end`, `duration`)
-              VALUES ('$exam_description', '$exam_type_id', '$teacher_subject_id', '$date_start', '$date_end', '$duration')";
+              VALUES ('$exam_description', '$exam_type_id', '$exam_teacher_subject_id', '$date_start', '$date_end', '$duration')";
   $conn->query($sql);
 
   if($conn->error)echo $conn->error.' line 33';

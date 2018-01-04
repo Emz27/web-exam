@@ -6,6 +6,7 @@ import {
   Link,
   Redirect
 } from 'react-router-dom'
+import moment from 'moment'
 import {fetchQuestion} from './../fetch.jsx'
 
 const ExamAddEdit =(props)=>(
@@ -18,18 +19,15 @@ const ExamAddEdit =(props)=>(
         {(()=>{
             if(props.parent.state.exam_state_type=="Add"){
               return (
-                <select value={props.parent.state.teacher_subject_id}
+                <select value={props.parent.state.exam_teacher_subject_id}
                   onChange={(event)=>{
+                    console.log("teacher_id exams : "+props.parent.state.exam_teacher_subject_id);
+                    console.log("select value: "+event.target.value);
                     props.parent.handleInputChange({
-                      teacher_subject_id: event.target.value
+                      exam_teacher_subject_id: event.target.value,
+                      exam_questions:[]
                     })
-                    props.parent.setState({
-                      fetch_filter:  ` where teacher_subject.id='${event.target.value}' `
-                    })
-                    fetchQuestion(props.parent);
-                    props.parent.setState({
-                      fetch_filter: ""
-                    })
+
                   }}>
                   <option value="" disabled></option>
                   {props.parent.state.available_subjects.map((q,i)=><option key={q.teacher_subject_id} value={q.teacher_subject_id}>{q.subject_description+" - "+q.teacher_name}</option>)}
@@ -53,19 +51,36 @@ const ExamAddEdit =(props)=>(
         })()}
       </label>
     </div>
+
     <div>
+      {
+        (()=>{
+          if(!props.parent.state.date_start){
+            props.parent.setState({date_start: moment(props.parent.state.current_time).format("YYYY-MM-DDTHH:mm")})
+          }
+        })()
+      }
       <label>Available Date</label>
-      <input type="datetime-local" value={props.parent.state.date_start}
+      <input type="datetime-local" value={moment(props.parent.state.date_start).format("YYYY-MM-DDTHH:mm")}
         onChange={(event)=>{console.log(event.target.value);props.parent.handleInputChange({date_start: event.target.value})}}
-        max={props.parent.state.date_end}
+        min={moment(props.parent.state.current_time).subtract(1,"month").format("YYYY-MM-DDTHH:mm")}
+        max={(props.parent.state.date_end)?moment(props.parent.state.date_end).format("YYYY-MM-DDTHH:mm"):moment(props.parent.state.current_time).add(6,"month").format("YYYY-MM-DDTHH:mm")}
         required
       />
     </div>
     <div>
+      {
+        (()=>{
+          if(!props.parent.state.date_end){
+            props.parent.setState({date_end: moment(props.parent.state.current_time).add(1,"month").format("YYYY-MM-DDTHH:mm")})
+          }
+        })()
+      }
       <label>Expiry Date</label>
-      <input type="datetime-local" value={props.parent.state.date_end}
+      <input type="datetime-local" value={moment(props.parent.state.date_end).format("YYYY-MM-DDTHH:mm")}
         onChange={(event)=>{console.log(event.target.value);props.parent.handleInputChange({date_end: event.target.value})}}
-        min={props.parent.state.date_start}
+        min={(props.parent.state.date_start)?moment(props.parent.state.date_start).format("YYYY-MM-DDTHH:mm"):moment(props.parent.state.current_time).subtract(3,"month").format("YYYY-MM-DDTHH:mm")}
+        max={moment(props.parent.state.current_time).add(3,"month").format("YYYY-MM-DDTHH:mm")}
         required
       />
     </div>

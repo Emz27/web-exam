@@ -21,7 +21,8 @@ const user = {
   middlename: null,
   lastname: null,
   type: -1,
-  date_created: null
+  date_created: null,
+  current_time:""
 }
 // get user session
 $.ajax({
@@ -38,6 +39,7 @@ $.ajax({
     user.lastname = data.lastname;
     user.type = data.type;
     user.date_created = data.date_created;
+    user.curret_time
   }
   ReactDOM.render(
       <MainPage user={user}/>,
@@ -87,7 +89,7 @@ class MainPage extends React.Component{
       case "1":
         return (
           <div>
-            <AdminPage logoutUser={this.logoutUser} />
+            <AdminPage user={this} logoutUser={this.logoutUser} />
           </div>
         )
       // case "2":

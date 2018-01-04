@@ -7,11 +7,11 @@ import {
   Redirect,
   Switch
 } from 'react-router-dom'
-
+import moment from 'moment';
 import {QuestionContainer} from './question/QuestionContainer.jsx'
 import {ExamContainer} from './exam/ExamContainer.jsx'
 import {ExamTable} from './exam/ExamTable.jsx'
-import {fetchExam,fetchSubject,fetchTeacher,fetchExamType,fetchQuestion,fetchQuestionType,fetchAvailableSubject} from './fetch.jsx'
+import {fetchTime,fetchExam,fetchSubject,fetchTeacher,fetchExamType,fetchQuestion,fetchQuestionType,fetchAvailableSubject} from './fetch.jsx'
 import {emptyQuestion,emptyExam} from './emptyState.jsx'
 
 class ExamPage extends React.Component{
@@ -23,13 +23,15 @@ class ExamPage extends React.Component{
       ...emptyQuestion,
       ...emptyExam,
 
+      fetch_fiter:"",
       exams:[],
       exam_types: [],
       teachers: [],
       subjects: [],
       available_subjects:[],
       question_types:[],
-      questions:[]
+      questions:[],
+      current_time:""
     }
     this.handleInputChange = this.handleInputChange.bind(this)
 
@@ -56,6 +58,7 @@ class ExamPage extends React.Component{
     fetchQuestion(this);
     fetchExam(this);
     fetchAvailableSubject(this);
+    fetchTime(this);
   }
   handleInputChange(input){
     this.setState({...input});
@@ -65,7 +68,7 @@ class ExamPage extends React.Component{
     event.preventDefault();
       // if(!this.exam_description) return;
       // if(!this.exam_type_id) return;
-      // if(!this.teacher_subject_id) return;
+      // if(!this.exam_teacher_subject_id) return;
       // if(!this.date_start) return;
       // if(!this.date_end) return;
       // if(!this.duration) return;
@@ -81,9 +84,14 @@ class ExamPage extends React.Component{
         }
       })
       .done((data)=>{
-        console.dir(data);
+        console.dir(this.state);
+        console.dir(this.state);
+
+
         this.setState({
-          exam_state_type: "View"
+          exam_state_type: "View",
+          question_state_type: "View",
+          ...emptyExam
         });
         this.fetch();
       })
@@ -96,7 +104,6 @@ class ExamPage extends React.Component{
     this.setState({
       exam_state_type: "View"
     })
-    this.fetch();
   }
   handleExamDeleteButton(id){
     if (confirm("Are You Sure you Want to delete the user?") == true) {
@@ -117,17 +124,16 @@ class ExamPage extends React.Component{
     }
   }
   handleExamUpdateButton(exam){
-
     exam.exam_state_type= "Update"
-    console.dir(exam)
+    exam.question_state_type= "View"
     this.setState({
       ...exam
-    })
+    });
   }
   handleExamAddButton(exam){
-    console.dir(exam);
+    exam.exam_state_type= "Add"
+    exam.question_state_type= "View"
     this.setState({
-      exam_state_type: 'Add',
       ...emptyExam
     })
   }
@@ -149,9 +155,9 @@ handleQuestionSubmitButton(event){
       }
     })
     .done((data)=>{
-      console.dir(data);
       this.setState({
-        question_state_type: "View"
+        question_state_type: "View",
+        ...emptyQuestion
       });
       this.fetch();
     })
@@ -162,9 +168,9 @@ handleQuestionSubmitButton(event){
 handleQuestionCancelButton(event){
   event.preventDefault();
   this.setState({
-    question_state_type: "View"
+    question_state_type: "View",
+    ...emptyQuestion
   })
-  this.fetch();
 }
 handleQuestionDeleteButton(id){
   if (confirm("Are You Sure you Want to delete the user?") == true) {
@@ -191,6 +197,7 @@ handleQuestionUpdateButton(question){
   })
 }
 handleQuestionAddButton(question){
+  console.log("yeyyeye ur views ar ruine ddd")
   this.setState({
     question_state_type: 'Add',
     ...emptyQuestion

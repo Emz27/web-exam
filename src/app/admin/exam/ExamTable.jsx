@@ -14,6 +14,7 @@ const ExamTable = (props)=>{
       <td>{index+1}</td>
       <td>{q.exam_description}</td>
       <td>{q.exam_type_description}</td>
+      <td>{q.subject_description}</td>
       <td>{q.teacher_name}</td>
       <td>{q.date_start}</td>
       <td>{q.date_end}</td>
@@ -41,7 +42,7 @@ const ExamTable = (props)=>{
       <button
         onClick={
           (event)=>{
-            props.parent.setState({exam_state_type:"Add"})
+            props.parent.setState({exam_state_type:"Add",question_state_type:"View"})
           }
         }
       >Add Exam</button>
@@ -50,6 +51,7 @@ const ExamTable = (props)=>{
         <th>#</th>
         <th>Description</th>
         <th>Exam Type</th>
+        <th>Subject</th>
         <th>Teacher</th>
         <th>Date Available</th>
         <th>Date Expire</th>

@@ -56,13 +56,13 @@ const QuestionAddEdit =(props)=>(
       <label>
         Subject
         {(()=>{
-            if(props.parent.state.question_state_type=="Add"){
+            if(props.parent.state.question_state_type=="Add"||props.parent.state.teacher_subject_id){
               return (
-                <select value={props.parent.state.teacher_subject_id}
+                <select value={props.parent.state.question_teacher_subject_id}
                   required
                   onChange={(event)=>{
                     props.parent.handleInputChange({
-                      teacher_subject_id: event.target.value
+                      question_teacher_subject_id: event.target.value
                     })
                   }}>
                   <option value="" disabled></option>

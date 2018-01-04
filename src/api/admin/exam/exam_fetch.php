@@ -3,7 +3,8 @@
   session_start();
 
   $conn = new mysqli($db_host, $db_username, $db_password, $db_name);
-
+  $fetch_filter = isset($_POST['fetch_filter'])?$_POST['fetch_filter']:"";
+  if($fetch_filter=="") $fetch_filter = isset($_GET['fetch_filter'])?$_GET['fetch_filter']:"";
   if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
   }
@@ -14,7 +15,7 @@
             exam_type.description as exam_type_description,
             subject.id as subject_id,
             subject.description as subject_description,
-            teacher_subject.id as teacher_subject_id,
+            teacher_subject.id as exam_teacher_subject_id,
             user.id as teacher_id,
             concat(user.firstname,' ',user.lastname) as teacher_name,
             date_end,
@@ -25,7 +26,8 @@
             left join exam_type on exam_type.id = exam.type
             left join teacher_subject on teacher_subject.id = exam.teacher_subject
             left join user on user.id = teacher_subject.teacher
-            left join subject on subject.id = teacher_subject.subject";
+            left join subject on subject.id = teacher_subject.subject
+            $fetch_filter";
   $data = array();
   $result = $conn->query($sql);
   echo $conn->error;

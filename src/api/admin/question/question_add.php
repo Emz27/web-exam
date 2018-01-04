@@ -14,7 +14,7 @@
   $question_limit = isset($_POST['question_limit'])?$_POST['question_limit']:"";
   $point = isset($_POST['point'])?$_POST['point']:"";
   $question_options = isset($_POST['question_options'])?$_POST['question_options']:array();
-  $teacher_subject_id = isset($_POST['teacher_subject_id'])?$_POST['teacher_subject_id']:"";
+  $question_teacher_subject_id = isset($_POST['question_teacher_subject_id'])?$_POST['question_teacher_subject_id']:"";
 
   $conn = new mysqli($db_host, $db_username, $db_password, $db_name);
 
@@ -23,7 +23,7 @@
   }
 
   $sql = "INSERT INTO `question`(`description`, `teacher_subject`, `type`, `exam_type`, `point`)
-            VALUES ('$question_description','$teacher_subject_id','$question_type_id','$exam_type_id','$point')";
+            VALUES ('$question_description','$question_teacher_subject_id','$question_type_id','$exam_type_id','$point')";
   $conn->query($sql);
 
   if($conn->error)echo $conn->error.' line 33';

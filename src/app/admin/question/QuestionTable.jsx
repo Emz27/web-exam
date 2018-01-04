@@ -12,6 +12,11 @@ import {
 const QuestionTable = (props)=>{
   const items = props.parent.state.questions.filter((item)=>{
           if(props.parent.state.exam_questions.some((i)=>i.question_id == item.question_id))return false;
+          if(props.parent.state.exam_state_type
+            &&props.parent.state.exam_state_type!="View"
+            &&props.parent.state.exam_teacher_subject_id != item.question_teacher_subject_id){
+            return false;
+          }
           return true;
         }).map((q,index)=>
         (
