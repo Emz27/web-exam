@@ -20,7 +20,6 @@ class QuestionPage extends React.Component{
       exam_questions:[],
 
       available_subjects:[],
-      exam_types: [],
       teachers: [],
       subjects: [],
       question_types:[],
@@ -47,7 +46,6 @@ class QuestionPage extends React.Component{
   handleQuestionSubmitButton(event){
     event.preventDefault();
       if(!this.state.question_description)return;
-      if(!this.state.exam_type_id)return;
       if(!this.state.question_type_id)return;
       if(this.state.question_options.some((x)=>!x.description))return;
       if(!this.state.question_options.some((x)=>x.is_correct=="1"))return;

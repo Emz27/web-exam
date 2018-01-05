@@ -56,7 +56,14 @@ const QuestionAddEdit =(props)=>(
       <label>
         Subject
         {(()=>{
-            if(props.parent.state.question_state_type=="Add"||props.parent.state.teacher_subject_id){
+            if(!props.parent.state.question_teacher_subject_id && props.parent.state.exam_teacher_subject_id){
+              props.parent.setState((lastState)=>({
+                question_teacher_subject_id:lastState.exam_teacher_subject_id,
+                question_subject_description:lastState.exam_subject_description,
+                question_teacher_name:lastState.exam_teacher_name
+              }));
+            }
+            if(props.parent.state.question_state_type=="Add"&&!props.parent.state.question_teacher_subject_id){
               return (
                 <select value={props.parent.state.question_teacher_subject_id}
                   required
@@ -70,31 +77,20 @@ const QuestionAddEdit =(props)=>(
                 </select>
               )
             }
-            else return (<div>{props.parent.state.subject_description+" - "+props.parent.state.teacher_name}</div>)
-        })()}
-      </label>
-    </div>
-    <div>
-      <label>
-        Exam Type
-        {(()=>{
-        return (
-          <select required value={props.parent.state.exam_type_id} onChange={(event)=>{props.parent.handleInputChange({exam_type_id: event.target.value})}}>
-            <option value="" disabled></option>
-            {props.parent.state.exam_types.map((q,i)=><option key={q.id} value={q.id}>{q.description}</option>)}
-          </select>
-        )
+            else{
+              return (<div>{props.parent.state.question_subject_description+" - "+props.parent.state.question_teacher_name}</div>)
+            }
         })()}
       </label>
     </div>
     <div>
       <label>Point </label>
       {()=>{
-          if(!props.parent.state.point)props.parent.handleInputChange({point: 1});
+          if(!props.parent.state.question_point)props.parent.handleInputChange({question_point: 1});
         }}
-      <input type="number" value={props.parent.state.point}
+      <input type="number" value={props.parent.state.question_point}
         onChange={(event)=>{
-          if(event.target.value >0)props.parent.handleInputChange({point: event.target.value})
+          if(event.target.value >0)props.parent.handleInputChange({question_point: event.target.value})
         }}
         min={0}
         required
@@ -138,8 +134,8 @@ const QuestionAddEdit =(props)=>(
                   };
                   if(type_description == "True or False")return;
                   if(type_description == "Identification" || type_description == "Enumeration"){add.is_correct = "1"}
-                  if(+props.parent.state.option_limit != 0){
-                    var limit = +props.parent.state.option_limit;
+                  if(+props.parent.state.question_option_limit != 0){
+                    var limit = +props.parent.state.question_option_limit;
                     if(props.parent.state.question_options.length <= limit){
                       props.parent.handleInputChange({question_options:[...props.parent.state.question_options,add]});
                     }

@@ -5,12 +5,12 @@
   $exam_id = isset($_POST['exam_id'])?$_POST['exam_id']:"";
   $exam_description = isset($_POST['exam_description'])?$_POST['exam_description']:"";
   $exam_type_id = isset($_POST['exam_type_id'])?$_POST['exam_type_id']:"";
-  $subject_id = isset($_POST['subject_id'])?$_POST['subject_id']:"";
+  $exam_subject_id = isset($_POST['exam_subject_id'])?$_POST['exam_subject_id']:"";
   $exam_teacher_subject_id = isset($_POST['exam_teacher_subject_id'])?$_POST['exam_teacher_subject_id']:"";
-  $teacher_id = isset($_POST['teacher_id'])?$_POST['teacher_id']:"";
-  $date_start = isset($_POST['date_start'])?str_replace("T"," ",$_POST['date_end']):"";
-  $date_end = isset($_POST['date_end'])?str_replace("T"," ",$_POST['date_end']):"";
-  $duration = isset($_POST['duration'])?$_POST['duration']:"";
+  $exam_teacher_id = isset($_POST['exam_teacher_id'])?$_POST['exam_teacher_id']:"";
+  $exam_date_start = isset($_POST['exam_date_start'])?str_replace("T"," ",$_POST['exam_date_start']):"";
+  $exam_date_end = isset($_POST['exam_date_end'])?str_replace("T"," ",$_POST['exam_date_end']):"";
+  $exam_duration = isset($_POST['exam_duration'])?$_POST['exam_duration']:"";
 
   $exam_questions = isset($_POST['exam_questions'])?$_POST['exam_questions']:"";
 
@@ -26,8 +26,8 @@
   }
 
   $sql = "UPDATE `exam` SET `description`='$exam_description',`type`='$exam_type_id',
-            `teacher_subject`='$exam_teacher_subject_id',`date_start`='$date_start',
-            `date_end`='$date_end',`duration`='$duration'
+            `teacher_subject`='$exam_teacher_subject_id',`date_start`='$exam_date_start',
+            `date_end`='$exam_date_end',`duration`='$exam_duration'
             WHERE id='$exam_id'";
   $conn->query($sql);
   if($conn->error)echo $conn->error.' line 35';

@@ -4,16 +4,14 @@
 
   $question_id = isset($_POST['question_id'])?$_POST['question_id']:"";
   $question_description = isset($_POST['question_description'])?$_POST['question_description']:"";
-  $subject_id = isset($_POST['subject_id'])?$_POST['subject_id']:"";
-  $subject_description = isset($_POST['subject_description'])?$_POST['subject_description']:"";
-  $teacher_id = isset($_POST['teacher_id'])?$_POST['teacher_id']:"";
-  $teacher_name = isset($_POST['teacher_name'])?$_POST['teacher_name']:"";
-  $exam_type_id = isset($_POST['exam_type_id'])?$_POST['exam_type_id']:"";
-  $exam_type_description = isset($_POST['exam_type_description'])?$_POST['exam_type_description']:"";
+  $question_subject_id = isset($_POST['question_subject_id'])?$_POST['question_subject_id']:"";
+  $question_subject_description = isset($_POST['question_subject_description'])?$_POST['question_subject_description']:"";
+  $question_teacher_id = isset($_POST['question_teacher_id'])?$_POST['question_teacher_id']:"";
+  $question_teacher_name = isset($_POST['question_teacher_name'])?$_POST['question_teacher_name']:"";
   $question_type_id = isset($_POST['question_type_id'])?$_POST['question_type_id']:"";
   $question_type_description = isset($_POST['question_type_description'])?$_POST['question_type_description']:"";
   $question_limit = isset($_POST['question_limit'])?$_POST['question_limit']:"";
-  $point = isset($_POST['point'])?$_POST['point']:"";
+  $question_point = isset($_POST['question_point'])?$_POST['question_point']:"";
   $question_options = isset($_POST['question_options'])?$_POST['question_options']:array();
   $question_teacher_subject_id = isset($_POST['question_teacher_subject_id'])?$_POST['question_teacher_subject_id']:"";
   $temp = array();
@@ -29,7 +27,7 @@
 
   $sql = "UPDATE `question` SET `description`='$question_description',
       `teacher_subject`='$question_teacher_subject_id',`type`='$question_type_id',
-      `exam_type`='$exam_type_id',`point`='$point'
+      `point`='$question_point'
       WHERE id='$question_id'";
   $conn->query($sql);
   if($conn->error)echo $conn->error.' line 35';

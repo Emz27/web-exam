@@ -23,8 +23,11 @@ const ExamAddEdit =(props)=>(
                   onChange={(event)=>{
                     console.log("teacher_id exams : "+props.parent.state.exam_teacher_subject_id);
                     console.log("select value: "+event.target.value);
+                    console.log("option desc: "+ event.target.options[event.target.selectedIndex].text)
                     props.parent.handleInputChange({
                       exam_teacher_subject_id: event.target.value,
+                      question_subject_description: event.target.options[event.target.selectedIndex].text,
+                      question_teacher_name: "",
                       exam_questions:[]
                     })
 
@@ -34,7 +37,7 @@ const ExamAddEdit =(props)=>(
                 </select>
               )
             }
-            else return (<div>{props.parent.state.subject_description+" - "+props.parent.state.teacher_name}</div>)
+            else return (<div>{props.parent.state.exam_subject_description+" - "+props.parent.state.exam_teacher_name}</div>)
         })()}
       </label>
     </div>
@@ -55,43 +58,43 @@ const ExamAddEdit =(props)=>(
     <div>
       {
         (()=>{
-          if(!props.parent.state.date_start){
-            props.parent.setState({date_start: moment(props.parent.state.current_time).format("YYYY-MM-DDTHH:mm")})
+          if(!props.parent.state.exam_date_start){
+            props.parent.setState({exam_date_start: moment(props.parent.state.current_time).format("YYYY-MM-DDTHH:mm")})
           }
         })()
       }
       <label>Available Date</label>
-      <input type="datetime-local" value={moment(props.parent.state.date_start).format("YYYY-MM-DDTHH:mm")}
-        onChange={(event)=>{console.log(event.target.value);props.parent.handleInputChange({date_start: event.target.value})}}
+      <input type="datetime-local" value={moment(props.parent.state.exam_date_start).format("YYYY-MM-DDTHH:mm")}
+        onChange={(event)=>{console.log(event.target.value);props.parent.handleInputChange({exam_date_start: event.target.value})}}
         min={moment(props.parent.state.current_time).subtract(1,"month").format("YYYY-MM-DDTHH:mm")}
-        max={(props.parent.state.date_end)?moment(props.parent.state.date_end).format("YYYY-MM-DDTHH:mm"):moment(props.parent.state.current_time).add(6,"month").format("YYYY-MM-DDTHH:mm")}
+        max={(props.parent.state.exam_date_end)?moment(props.parent.state.exam_date_end).format("YYYY-MM-DDTHH:mm"):moment(props.parent.state.current_time).add(6,"month").format("YYYY-MM-DDTHH:mm")}
         required
       />
     </div>
     <div>
       {
         (()=>{
-          if(!props.parent.state.date_end){
-            props.parent.setState({date_end: moment(props.parent.state.current_time).add(1,"month").format("YYYY-MM-DDTHH:mm")})
+          if(!props.parent.state.exam_date_end){
+            props.parent.setState({exam_date_end: moment(props.parent.state.current_time).add(1,"month").format("YYYY-MM-DDTHH:mm")})
           }
         })()
       }
       <label>Expiry Date</label>
-      <input type="datetime-local" value={moment(props.parent.state.date_end).format("YYYY-MM-DDTHH:mm")}
-        onChange={(event)=>{console.log(event.target.value);props.parent.handleInputChange({date_end: event.target.value})}}
-        min={(props.parent.state.date_start)?moment(props.parent.state.date_start).format("YYYY-MM-DDTHH:mm"):moment(props.parent.state.current_time).subtract(3,"month").format("YYYY-MM-DDTHH:mm")}
+      <input type="datetime-local" value={moment(props.parent.state.exam_date_end).format("YYYY-MM-DDTHH:mm")}
+        onChange={(event)=>{console.log(event.target.value);props.parent.handleInputChange({exam_date_end: event.target.value})}}
+        min={(props.parent.state.exam_date_start)?moment(props.parent.state.exam_date_start).format("YYYY-MM-DDTHH:mm"):moment(props.parent.state.current_time).subtract(3,"month").format("YYYY-MM-DDTHH:mm")}
         max={moment(props.parent.state.current_time).add(3,"month").format("YYYY-MM-DDTHH:mm")}
         required
       />
     </div>
     <div>
-      <label>Duration (in minutes) </label>
+      <label>exam_duration (in minutes) </label>
       {()=>{
-          if(!props.parent.state.duration)props.parent.handleInputChange({duration: 5});
+          if(!props.parent.state.exam_duration)props.parent.handleInputChange({exam_duration: 5});
         }}
-      <input type="number" value={props.parent.state.duration}
+      <input type="number" value={props.parent.state.exam_duration}
         onChange={(event)=>{
-          if(event.target.value >0)props.parent.handleInputChange({duration: event.target.value})
+          if(event.target.value >0)props.parent.handleInputChange({exam_duration: event.target.value})
         }}
         min={5}
         max={120}

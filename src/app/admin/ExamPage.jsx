@@ -127,21 +127,22 @@ class ExamPage extends React.Component{
     exam.exam_state_type= "Update"
     exam.question_state_type= "View"
     this.setState({
-      ...exam
+      ...exam,
+      ...emptyQuestion
     });
   }
   handleExamAddButton(exam){
     exam.exam_state_type= "Add"
     exam.question_state_type= "View"
     this.setState({
-      ...emptyExam
+      ...emptyExam,
+      ...emptyQuestion
     })
   }
 /////////////////////////////////////////
 handleQuestionSubmitButton(event){
   event.preventDefault();
     if(!this.state.question_description)return;
-    if(!this.state.exam_type_id)return;
     if(!this.state.question_type_id)return;
     if(this.state.question_options.some((x)=>!x.description))return;
     if(!this.state.question_options.some((x)=>x.is_correct=="1"))return;

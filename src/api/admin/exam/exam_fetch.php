@@ -13,14 +13,14 @@
             exam.description as exam_description,
             exam_type.id as exam_type_id,
             exam_type.description as exam_type_description,
-            subject.id as subject_id,
-            subject.description as subject_description,
+            subject.id as exam_subject_id,
+            subject.description as exam_subject_description,
             teacher_subject.id as exam_teacher_subject_id,
-            user.id as teacher_id,
-            concat(user.firstname,' ',user.lastname) as teacher_name,
-            date_end,
-            date_start,
-            duration
+            user.id as exam_teacher_id,
+            concat(user.firstname,' ',user.lastname) as exam_teacher_name,
+            date_end as exam_date_end,
+            date_start as exam_date_start,
+            duration as exam_duration
 
             from exam
             left join exam_type on exam_type.id = exam.type
@@ -37,20 +37,17 @@
       $sql1 = "SELECT
                 q.id as question_id,
                 q.description as question_description,
-                subject.id as subject_id,
-                subject.description as subject_description,
-                user.id as teacher_id,
-                concat(user.firstname,' ',user.lastname) as teacher_name,
+                subject.id as question_subject_id,
+                subject.description as question_subject_description,
+                user.id as question_teacher_id,
+                concat(user.firstname,' ',user.lastname) as question_teacher_name,
                 q.type as question_type_id,
                 question_type.description as question_type_description,
-                exam_type.id as exam_type_id,
-                exam_type.description as exam_type_description,
-                q.point as point,
-                question_type.option_limit as option_limit
+                q.point as question_point,
+                question_type.option_limit as question_option_limit
                 from exam_question
                 left join question as q on q.id = exam_question.question
                 left join question_type on q.type = question_type.id
-                left join exam_type on q.exam_type = exam_type.id
                 left join teacher_subject on teacher_subject.id = q.teacher_subject
                 left join user on teacher_subject.teacher = user.id
                 left join subject on teacher_subject.subject = subject.id

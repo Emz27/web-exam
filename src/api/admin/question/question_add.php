@@ -3,16 +3,14 @@
   session_start();
 
   $question_description = isset($_POST['question_description'])?$_POST['question_description']:"";
-  $subject_id = isset($_POST['subject_id'])?$_POST['subject_id']:"";
-  $subject_description = isset($_POST['subject_description'])?$_POST['subject_description']:"";
-  $teacher_id = isset($_POST['teacher_id'])?$_POST['teacher_id']:"";
-  $teacher_name = isset($_POST['teacher_name'])?$_POST['teacher_name']:"";
-  $exam_type_id = isset($_POST['exam_type_id'])?$_POST['exam_type_id']:"";
-  $exam_type_description = isset($_POST['exam_type_description'])?$_POST['exam_type_description']:"";
+  $question_subject_id = isset($_POST['question_subject_id'])?$_POST['question_subject_id']:"";
+  $question_subject_description = isset($_POST['question_subject_description'])?$_POST['question_subject_description']:"";
+  $question_teacher_id = isset($_POST['question_teacher_id'])?$_POST['question_teacher_id']:"";
+  $question_teacher_name = isset($_POST['question_teacher_name'])?$_POST['question_teacher_name']:"";
   $question_type_id = isset($_POST['question_type_id'])?$_POST['question_type_id']:"";
   $question_type_description = isset($_POST['question_type_description'])?$_POST['question_type_description']:"";
   $question_limit = isset($_POST['question_limit'])?$_POST['question_limit']:"";
-  $point = isset($_POST['point'])?$_POST['point']:"";
+  $question_point = isset($_POST['question_point'])?$_POST['question_point']:"";
   $question_options = isset($_POST['question_options'])?$_POST['question_options']:array();
   $question_teacher_subject_id = isset($_POST['question_teacher_subject_id'])?$_POST['question_teacher_subject_id']:"";
 
@@ -22,8 +20,8 @@
     die("Connection failed: " . $conn->connect_error);
   }
 
-  $sql = "INSERT INTO `question`(`description`, `teacher_subject`, `type`, `exam_type`, `point`)
-            VALUES ('$question_description','$question_teacher_subject_id','$question_type_id','$exam_type_id','$point')";
+  $sql = "INSERT INTO `question`(`description`, `teacher_subject`, `type`, `point`)
+            VALUES ('$question_description','$question_teacher_subject_id','$question_type_id','$question_point')";
   $conn->query($sql);
 
   if($conn->error)echo $conn->error.' line 33';

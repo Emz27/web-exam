@@ -26,11 +26,11 @@ const ExamQuestion = (props)=>{
       <li key={"multipleChoice"}><b>Multiple Choice </b>({multipleChoice.length})items ({
         (()=>{
           if(multipleChoice.length>0){
-            return multipleChoice.reduce(function (acc, obj) { return (+acc) +(+obj.point); },0);
+            return multipleChoice.reduce(function (acc, obj) { return (+acc) +(+obj.question_point); },0);
           }
           return "0"
         })()
-      }) points</li>
+      }) point</li>
       {
         multipleChoice.map((item,index)=>
           <li>{item.question_description}
@@ -47,11 +47,11 @@ const ExamQuestion = (props)=>{
       <li key={"trueFalse"}><b>True or False </b>({trueFalse.length})items ({
         (()=>{
           if(trueFalse.length>0){
-            return trueFalse.reduce(function (acc, obj) { return (+acc) +(+obj.point); },0);
+            return trueFalse.reduce(function (acc, obj) { return (+acc) +(+obj.question_point); },0);
           }
           return "0"
         })()
-      }) points</li>
+      }) point</li>
       {
         trueFalse.map((item,index)=>
           <li>{item.question_description}
@@ -68,11 +68,11 @@ const ExamQuestion = (props)=>{
       <li key={"identification"}><b>Identification </b>({identification.length})items ({
         (()=>{
           if(identification.length>0){
-            return identification.reduce(function (acc, obj) { return (+acc) +(+obj.point); },0);
+            return identification.reduce(function (acc, obj) { return (+acc) +(+obj.question_point); },0);
           }
           return "0"
         })()
-      }) points</li>
+      }) point</li>
       {
         identification.map((item,index)=>
           <li>{item.question_description}
@@ -96,11 +96,11 @@ const ExamQuestion = (props)=>{
       }) items ({
         (()=>{
           if(enumeration.length>0){
-            return enumeration.reduce(function (acc, obj) { return acc + obj.question_options.length * obj.point; }, 0);
+            return enumeration.reduce(function (acc, obj) { return acc + obj.question_options.length * obj.question_point; }, 0);
           }
           return "0"
         })()
-      }) points</li>
+      }) point</li>
       {
         enumeration.map((item,index)=>
           <li key={item.question_id}>{item.question_description}

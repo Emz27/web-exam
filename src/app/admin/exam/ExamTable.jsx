@@ -14,11 +14,11 @@ const ExamTable = (props)=>{
       <td>{index+1}</td>
       <td>{q.exam_description}</td>
       <td>{q.exam_type_description}</td>
-      <td>{q.subject_description}</td>
-      <td>{q.teacher_name}</td>
-      <td>{q.date_start}</td>
-      <td>{q.date_end}</td>
-      <td>{q.duration+" minutes"}</td>
+      <td>{q.exam_subject_description}</td>
+      <td>{q.exam_teacher_name}</td>
+      <td>{q.exam_date_start}</td>
+      <td>{q.exam_date_end}</td>
+      <td>{q.exam_duration+" minutes"}</td>
       <td>
         <button
           onClick={(event)=>{

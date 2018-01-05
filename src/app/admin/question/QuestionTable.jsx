@@ -42,11 +42,10 @@ const QuestionTable = (props)=>{
       }
       <td>{index+1}</td>
       <td>{q.question_description}</td>
-      <td>{q.subject_description}</td>
-      <td>{q.teacher_name}</td>
+      <td>{q.question_subject_description}</td>
+      <td>{q.question_teacher_name}</td>
       <td>{q.question_type_description}</td>
-      <td>{q.exam_type_description}</td>
-      <td>{q.point}</td>
+      <td>{q.question_point}</td>
       <td>{q.question_options.length}</td>
       <td>
         <button
