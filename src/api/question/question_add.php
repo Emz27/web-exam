@@ -1,5 +1,5 @@
 <?php
-  include("../../config.php");
+  include("../config.php");
   session_start();
 
   $question_description = isset($_POST['question_description'])?$_POST['question_description']:"";

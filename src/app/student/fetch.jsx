@@ -12,128 +12,65 @@ const fetchTime = (props)=>{
         return alert("error in fetching Time: "+ xhr);
     });
 }
-const fetchExam = (props)=>{
+const fetchPresentExam = (props)=>{
+    console.dir(props)
     $.post({
-      url: "/../api/admin/exam/exam_fetch.php",
-      data:{fetch_filter:props.state.fetch_filter}
+      url: "/../api/student_exam/student_exam_fetch.php",
+      data:{
+        student_id: props.state.student_id,
+        state: "present"
+      }
     })
     .done((data)=>{
       var data = JSON.parse(data);
       // console.dir(data)
       var result={};
-      result.exams = data;
+      result.student_present_exams = data;
       props.setState({...result });
     })
     .fail(function(xhr) {
         return alert("error in fetching session: "+ xhr);
     });
 }
-const fetchAvailableSubject = (props)=>{
+const fetchFutureExam = (props)=>{
+    console.dir(props.state)
     $.post({
-      url: "/../api/admin/subject/available_subject_fetch.php",
-      data:{fetch_filter:props.state.fetch_filter}
+      url: "/../api/student_exam/student_exam_fetch.php",
+      data:{
+        student_id: props.state.student_id,
+        state: "future"
+      }
     })
     .done((data)=>{
+      console.dir(data)
       var data = JSON.parse(data);
-      // console.dir(data)
+      console.dir(data)
       var result={};
-      result.available_subjects = data;
+      result.student_future_exams = data;
       props.setState({...result });
     })
     .fail(function(xhr) {
         return alert("error in fetching session: "+ xhr);
     });
 }
-const fetchSubject = (props)=>{
+const fetchPastExam = (props)=>{
     $.post({
-      url: "/../api/admin/subject/subject_fetch.php",
-      data:{fetch_filter:props.state.fetch_filter}
+      url: "/../api/student_exam/student_exam_fetch.php",
+      data:{
+        student_id: props.state.student_id,
+        state: "past"
+      }
     })
     .done((data)=>{
+      console.dir(data)
       var data = JSON.parse(data);
       // console.dir(data)
       var result={};
-      result.subjects = data;
+      result.student_past_exams = data;
       props.setState({...result });
     })
     .fail(function(xhr) {
         return alert("error in fetching session: "+ xhr);
     });
 }
-const fetchExamType = (props)=>{
-    $.post({
-      url: "/../api/admin/exam_type/exam_type_fetch.php",
-      data:{fetch_filter:props.state.fetch_filter}
-    })
-    .done((data)=>{
-      var data = JSON.parse(data);
-      // console.dir(data)
-      var result={};
-      result.exam_types = data;
-      props.setState({...result });
-    })
-    .fail(function(xhr) {
-        return alert("error in fetching session: "+ xhr);
-    });
-}
-const fetchTeacher = (props)=>{
-    $.post({
-      url: "/../api/admin/teacher/teacher_fetch.php",
-      data:{fetch_filter:props.state.fetch_filter}
-    })
-    .done((data)=>{
-      var data = JSON.parse(data);
-      // console.dir(data)
-      var result={};
-      result.teachers = data;
-      props.setState({...result });
-    })
-    .fail(function(xhr) {
-        return alert("error in fetching session: "+ xhr);
-    });
-}
-const fetchQuestionType = (props)=>{
-    $.post({
-      url: "/../api/admin/question_type/question_type_fetch.php",
-      data:{fetch_filter:props.state.fetch_filter}
-    })
-    .done((data)=>{
-      var data = JSON.parse(data);
-      // console.dir(data)
-      var result={};
-      result.question_types = data;
-      props.setState({...result });
-    })
-    .fail(function(xhr) {
-        return alert("error in fetching session: "+ xhr);
-    });
-}
-const fetchQuestion = (props)=>{
-    $.post({
-      url: "/../api/admin/question/question_fetch.php",
-      data:{fetch_filter:props.state.fetch_filter}
-    })
-    .done((data)=>{
-      // console.dir(data)
-      var data = JSON.parse(data);
-      // console.dir(data)
-      // console.dir(props.state.fetch_filter)
-      var result={};
-      result.questions = data;
-      props.setState({...result });
-    })
-    .fail(function(xhr) {
-        return alert("error in fetching session: "+ xhr);
-    });
-}
-
-export {
-  fetchSubject,
-  fetchTeacher,
-  fetchExamType,
-  fetchQuestion,
-  fetchQuestionType,
-  fetchAvailableSubject,
-  fetchExam,
-  fetchTime
-}
+export {fetchPastExam,fetchPresentExam, fetchFutureExam,fetchTime}

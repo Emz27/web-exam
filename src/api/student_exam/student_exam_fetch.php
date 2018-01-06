@@ -4,10 +4,33 @@
 
   $conn = new mysqli($db_host, $db_username, $db_password, $db_name);
   $fetch_filter = isset($_POST['fetch_filter'])?$_POST['fetch_filter']:"";
-  if($fetch_filter=="") $fetch_filter = isset($_GET['fetch_filter'])?$_GET['fetch_filter']:"";
+  $student_id = isset($_POST['student_id'])?$_POST['student_id']:"";
+  $state = isset($_POST['state'])?$_POST['state']:"";
+  if($fetch_filter=="") $fetch_filter = isset($_GET['fetch_filter'])?$_GET['fetch_filter']:" 1";
   if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
   }
+  switch($state){
+    case "present":{
+      $fetch_filter =  " where student_subject.student ='$student_id'
+      and exam.date_start < now()
+      and exam.date_end > now() ";
+      break;
+    }
+    case "future":{
+      $fetch_filter = "  where student_subject.student ='$student_id'
+      and exam.date_start > now()
+      and exam.date_end > now()";
+      break;
+    }
+    case "past":{
+      $fetch_filter = " where student_subject.student ='$student_id'
+      and exam.date_start < now()
+      and exam.date_end < now()";
+      break;
+    }
+  }
+
   $sql = "SELECT
             exam.id as exam_id,
             exam.description as exam_description,
@@ -27,6 +50,9 @@
             left join teacher_subject on teacher_subject.id = exam.teacher_subject
             left join user on user.id = teacher_subject.teacher
             left join subject on subject.id = teacher_subject.subject
+
+            left join student_subject on student_subject.teacher_subject = teacher_subject.id
+
             $fetch_filter";
   $data = array();
   $result = $conn->query($sql);
@@ -57,12 +83,27 @@
       echo $conn->error;
       while($row1 = $result1->fetch_assoc()){
         $row1['question_options'] = array();
+        $row1['student_answers'] = array();
         $sql2 = "SELECT * from question_option where question=".$row1['question_id']."";
         $result2 = $conn->query($sql2);
         while($row2 = $result2->fetch_assoc()){
           array_push($row1['question_options'],$row2);
         }
+        $sql3 = "SELECT answer from student_answer where exam_question=".$row1['question_id']."
+                    and student='".$student_id."'";
+        $result3 = $conn->query($sql3);
+        while($row3 = $result3->fetch_assoc()){
+          $row3["student_answer_is_correct"] = "0";
+
+          $sql4 = "SELECT * from question_option
+                    where question_option.question = '".$row1['question_id']."'
+                    AND description = '".$row3['answer']."'";
+          $result4 = $conn->query($sql4);
+          if($result4->num_rows) $row3["student_answer_is_correct"] = "1";
+          array_push($row1['student_answers'],$row3);
+        }
         array_push($row['exam_questions'],$row1);
+
       }
       array_push($data,$row);
     }

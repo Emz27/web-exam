@@ -5,8 +5,10 @@ import {
   Route,
   Link,
   Redirect,
-  withRouter
+  Switch
 } from 'react-router-dom'
+
+import {ProfilePage} from './ProfilePage.jsx'
 
 const MenuLink = ({ label, to }) => (
   <Route path={to} exact={true} children={
@@ -20,16 +22,12 @@ const MenuLink = ({ label, to }) => (
 
 const NavBar = () => (
   <ul>
-    <MenuLink to="/" label="Home"/>
-    <MenuLink to="/users" label="Users"/>
-    <MenuLink to="/questions" label="Questions"/>
-    <MenuLink to="/exams" label="Exams"/>
-    <MenuLink to="/subjects" label="Subjects"/>
-    <MenuLink to="/departments" label="Departments"/>
+    <MenuLink to="/student/profile" label="Home"/>
+    <MenuLink to="/logout" label="Logout"/>
   </ul>
 )
 
-class MainPage extends React.Component{
+class StudentPage extends React.Component{
   constructor(props) {
     super(props);
   }
@@ -44,12 +42,25 @@ class MainPage extends React.Component{
       <Router>
       <div>
         <NavBar />
-        <Route path="/" component={HomePage} />
-        <Route path="/users" component={UserPage} />
-        <Route path="/questions" component={QuestionPage} />
-        <Route path="/exams" component={ExamPage} />
-        <Route path="/subjects" component={SubjectPage} />
-        <Route path="/departments" component={DepartmentPage} />
+        <div>
+        <Switch>
+          <Route path="/student/profile"  render={
+            ()=>{
+              console.dir(this.props.user)
+              return (
+                <ProfilePage user={this.props.user} />
+              )
+
+            }
+          } />
+          <Route path="/logout" render={function(){
+            console.log("logout");
+            this.props.logoutUser()
+            return (<Redirect to={'/login'}/>)
+          }.bind(this)} />
+
+        </Switch>
+        </div>
       </div>
       </Router>
     )
@@ -57,4 +68,4 @@ class MainPage extends React.Component{
 }
 
 
-export default MainPage
+export {StudentPage}

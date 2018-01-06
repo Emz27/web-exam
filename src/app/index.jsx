@@ -11,7 +11,7 @@ import 'whatwg-fetch'
 
 import {LoginPage} from './LoginPage.jsx'
 import {AdminPage} from './admin/MainPage.jsx'
-import {TeacherPage} from './teacher/MainPage.jsx'
+// import {TeacherPage} from './teacher/MainPage.jsx'
 import {StudentPage} from './student/MainPage.jsx'
 
 const user = {
@@ -89,19 +89,19 @@ class MainPage extends React.Component{
       case "1":
         return (
           <div>
-            <AdminPage user={this} logoutUser={this.logoutUser} />
+            <AdminPage user={this} logoutUser={this.logoutUser} user={this.state} />
           </div>
         )
-      case "2":
-        return (
-          <div>
-            <Teacherpage logoutUser={this.logoutUser} />
-          </div>
-        )
+      // case "2":
+      //   return (
+      //     <div>
+      //       <Teacherpage logoutUser={this.logoutUser} user={this.state} />
+      //     </div>
+      //   )
       case "3":
         return (
           <div>
-            <StudentPage logoutUser={this.logoutUser} />
+            <StudentPage logoutUser={this.logoutUser} user={this.state} />
           </div>
         )
       default:{
