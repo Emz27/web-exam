@@ -14,7 +14,8 @@
   $question_options = isset($_POST['question_options'])?$_POST['question_options']:array();
   $question_teacher_subject_id = isset($_POST['question_teacher_subject_id'])?$_POST['question_teacher_subject_id']:"";
 
-  $conn = new mysqli($db_host, $db_username, $db_password, $db_name);
+$conn = new mysqli($db_host, $db_username, $db_password, $db_name);
+$conn->query("SET time_zone = "+08:00"");
 
   if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
