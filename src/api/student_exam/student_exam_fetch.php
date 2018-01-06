@@ -3,7 +3,7 @@
   session_start();
 
 $conn = new mysqli($db_host, $db_username, $db_password, $db_name);
-$conn->query("SET time_zone = "+08:00"");
+$conn->query("SET time_zone = '+08:00'");
   $fetch_filter = isset($_POST['fetch_filter'])?$_POST['fetch_filter']:"";
   $student_id = isset($_POST['student_id'])?$_POST['student_id']:"";
   $state = isset($_POST['state'])?$_POST['state']:"";
