@@ -92,6 +92,10 @@ class LoginPage extends React.Component{
 
       Work in progress feature:<br/>
         - student examination sheet<br/>
+
+      Recent Dev Activity
+      - User homepage that contains exam tables (January 7)
+      - Admin Crud (January 4)
       </div>
 
       </Router>
