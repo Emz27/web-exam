@@ -94,8 +94,9 @@ class LoginPage extends React.Component{
         - student examination sheet<br/>
 
       Recent Dev Activity
-      - User homepage that contains exam tables (January 7)
-      - Admin Crud (January 4)
+      - User homepage with exam tables (January 7)
+      - Major Admin CRUD bug fix and tweaks (January 5,6)
+      - Admin CRUD (January 4)
       </div>
 
       </Router>
