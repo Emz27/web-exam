@@ -78,7 +78,7 @@ class ExamPage extends React.Component{
       var mode = this.state.exam_state_type=="Add"?"add":"update"
       console.dir(this.state);
       $.post({
-        url: "/../api/admin/exam/exam_"+mode+".php",
+        url: "/../api/exam/exam_"+mode+".php",
         data: {
           ...this.state
         }
@@ -108,7 +108,7 @@ class ExamPage extends React.Component{
   handleExamDeleteButton(id){
     if (confirm("Are You Sure you Want to delete the user?") == true) {
       $.post({
-        url: "/../api/admin/exam/exam_delete.php",
+        url: "/../api/exam/exam_delete.php",
         data: {
           exam_id: id
         }
@@ -150,7 +150,7 @@ handleQuestionSubmitButton(event){
     var mode = this.state.question_state_type=="Add"?"add":"update"
     console.dir(this.state);
     $.post({
-      url: "/../api/admin/question/question_"+mode+".php",
+      url: "/../api/question/question_"+mode+".php",
       data: {
         ...this.state
       }
@@ -176,7 +176,7 @@ handleQuestionCancelButton(event){
 handleQuestionDeleteButton(id){
   if (confirm("Are You Sure you Want to delete the user?") == true) {
     $.post({
-      url: "/../api/admin/question/question_delete.php",
+      url: "/../api/question/question_delete.php",
       data: {
         question_id: id
       }

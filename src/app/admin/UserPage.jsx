@@ -38,7 +38,7 @@ class UserPage extends React.Component{
   //
   // }
   fetchUser(){
-      $.post("/../api/admin/user/user_fetch.php")
+      $.post("/../api/user/user_fetch.php")
       .done((data)=>{
         var data = JSON.parse(data);
         var temp = data.slice();
@@ -58,7 +58,7 @@ class UserPage extends React.Component{
       });
   }
   fetchSubject(){
-      $.post("/../api/admin/subject/subject_fetch.php")
+      $.post("/../api/subject/subject_fetch.php")
       .done((data)=>{
         var data = JSON.parse(data);
 
@@ -71,7 +71,7 @@ class UserPage extends React.Component{
       });
   }
   fetchAvailableSubject(){
-      $.post("/../api/admin/teacher_subject/teacher_subject_fetch.php")
+      $.post("/../api/teacher_subject/teacher_subject_fetch.php")
       .done((data)=>{
 
         var temp = JSON.parse(data);
@@ -89,7 +89,7 @@ class UserPage extends React.Component{
       var mode = this.state.state_type=="Add"?"add":"update"
       console.dir(this.state);
       $.post({
-        url: "/../api/admin/user/user_"+mode+".php",
+        url: "/../api/user/user_"+mode+".php",
         data: {
           ...this.state
         }
@@ -119,7 +119,7 @@ class UserPage extends React.Component{
   handleDeleteButton(user){
     if (confirm("Are You Sure you Want to delete the user?") == true) {
       $.post({
-        url: "/../api/admin/user/user_delete.php",
+        url: "/../api/user/user_delete.php",
         data: {
           id: user
         }

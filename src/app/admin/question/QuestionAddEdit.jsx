@@ -63,7 +63,7 @@ const QuestionAddEdit =(props)=>(
                 question_teacher_name:lastState.exam_teacher_name
               }));
             }
-            if(props.parent.state.question_state_type=="Add"&&!props.parent.state.question_teacher_subject_id){
+            if(props.parent.state.question_state_type=="Add"||!props.parent.state.question_teacher_subject_id){
               return (
                 <select value={props.parent.state.question_teacher_subject_id}
                   required

@@ -24,10 +24,11 @@ const ExamAddEdit =(props)=>(
                     console.log("teacher_id exams : "+props.parent.state.exam_teacher_subject_id);
                     console.log("select value: "+event.target.value);
                     console.log("option desc: "+ event.target.options[event.target.selectedIndex].text)
+                    var selectedOption = event.target.options[event.target.selectedIndex];
                     props.parent.handleInputChange({
                       exam_teacher_subject_id: event.target.value,
-                      question_subject_description: event.target.options[event.target.selectedIndex].text,
-                      question_teacher_name: "",
+                      question_subject_description: selectedOption.text.slice(0,selectedOption.text.indexOf(" - ")),
+                      question_teacher_name: selectedOption.text.slice(selectedOption.text.indexOf(" - ")),
                       exam_questions:[]
                     })
 

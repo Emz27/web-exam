@@ -33,7 +33,7 @@ class SubjectPage extends React.Component{
       this.fetchDepartment();
   }
   fetchSubject(){
-      $.post("/../api/admin/subject/subject_fetch.php")
+      $.post("/../api/subject/subject_fetch.php")
       .done((data)=>{
         var data = JSON.parse(data);
 
@@ -46,7 +46,7 @@ class SubjectPage extends React.Component{
       });
   }
   fetchDepartment(){
-      $.post("/../api/admin/department/department_fetch.php")
+      $.post("/../api/department/department_fetch.php")
       .done((data)=>{
         var data = JSON.parse(data);
 
@@ -63,7 +63,7 @@ class SubjectPage extends React.Component{
       var mode = this.state.state_type=="Add"?"add":"update"
       console.dir(this.state);
       $.post({
-        url: "/../api/admin/subject/subject_"+mode+".php",
+        url: "/../api/subject/subject_"+mode+".php",
         data: {
           id: this.state.id,
           description: this.state.description,
@@ -94,7 +94,7 @@ class SubjectPage extends React.Component{
   handleDeleteButton(id){
     if (confirm("Are You Sure you Want to delete the user?") == true) {
       $.post({
-        url: "/../api/admin/subject/subject_delete.php",
+        url: "/../api/subject/subject_delete.php",
         data: {
           id: id
         }

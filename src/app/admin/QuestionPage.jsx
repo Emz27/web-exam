@@ -53,7 +53,7 @@ class QuestionPage extends React.Component{
       var mode = this.state.question_state_type=="Add"?"add":"update"
       console.dir(this.state);
       $.post({
-        url: "/../api/admin/question/question_"+mode+".php",
+        url: "/../api/question/question_"+mode+".php",
         data: {
           ...this.state
         }
@@ -83,7 +83,7 @@ class QuestionPage extends React.Component{
   handleQuestionDeleteButton(id){
     if (confirm("Are You Sure you Want to delete the user?") == true) {
       $.post({
-        url: "/../api/admin/question/question_delete.php",
+        url: "/../api/question/question_delete.php",
         data: {
           question_id: id
         }

@@ -14,7 +14,7 @@ const fetchTime = (props)=>{
 }
 const fetchExam = (props)=>{
     $.post({
-      url: "/../api/exam/exam_fetch.php",
+      url: "/../api/admin/exam/exam_fetch.php",
       data:{fetch_filter:props.state.fetch_filter}
     })
     .done((data)=>{
@@ -30,7 +30,7 @@ const fetchExam = (props)=>{
 }
 const fetchAvailableSubject = (props)=>{
     $.post({
-      url: "/../api/subject/available_subject_fetch.php",
+      url: "/../api/admin/subject/available_subject_fetch.php",
       data:{fetch_filter:props.state.fetch_filter}
     })
     .done((data)=>{
@@ -46,7 +46,7 @@ const fetchAvailableSubject = (props)=>{
 }
 const fetchSubject = (props)=>{
     $.post({
-      url: "/../api/subject/subject_fetch.php",
+      url: "/../api/admin/subject/subject_fetch.php",
       data:{fetch_filter:props.state.fetch_filter}
     })
     .done((data)=>{
@@ -62,7 +62,7 @@ const fetchSubject = (props)=>{
 }
 const fetchExamType = (props)=>{
     $.post({
-      url: "/../api/exam_type/exam_type_fetch.php",
+      url: "/../api/admin/exam_type/exam_type_fetch.php",
       data:{fetch_filter:props.state.fetch_filter}
     })
     .done((data)=>{
@@ -78,7 +78,7 @@ const fetchExamType = (props)=>{
 }
 const fetchTeacher = (props)=>{
     $.post({
-      url: "/../api/teacher/teacher_fetch.php",
+      url: "/../api/admin/teacher/teacher_fetch.php",
       data:{fetch_filter:props.state.fetch_filter}
     })
     .done((data)=>{
@@ -94,7 +94,7 @@ const fetchTeacher = (props)=>{
 }
 const fetchQuestionType = (props)=>{
     $.post({
-      url: "/../api/question_type/question_type_fetch.php",
+      url: "/../api/admin/question_type/question_type_fetch.php",
       data:{fetch_filter:props.state.fetch_filter}
     })
     .done((data)=>{
@@ -110,7 +110,7 @@ const fetchQuestionType = (props)=>{
 }
 const fetchQuestion = (props)=>{
     $.post({
-      url: "/../api/question/question_fetch.php",
+      url: "/../api/admin/question/question_fetch.php",
       data:{fetch_filter:props.state.fetch_filter}
     })
     .done((data)=>{
