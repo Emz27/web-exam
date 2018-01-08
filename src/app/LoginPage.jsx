@@ -80,23 +80,6 @@ class LoginPage extends React.Component{
         />
         <input type="submit" value="Submit" />
       </form>
-      <br />
-      <br />
-      <br />
-      Progress: 70% as of 4:30 AM January 7, 2018<br/>
-      Features:<br/>
-        #Account System<br/>
-        - username and password credentials are required to use the service<br/>
-        #Admin System<br/>
-        - create/update/delete/view user,subject,department,question,exam data<br/>
-
-      Work in progress feature:<br/>
-        - student examination sheet<br/>
-
-      Recent Dev Activity
-      - User homepage with exam tables (January 7)
-      - Major Admin CRUD bug fix and tweaks (January 5,6)
-      - Admin CRUD (January 4)
       </div>
 
       </Router>
