@@ -5,8 +5,12 @@ import {
   Route,
   Link,
   Redirect,
-  withRouter
+  Switch
 } from 'react-router-dom'
+import {HomePage} from './HomePage.jsx'
+import {ExamPage} from './ExamPage.jsx'
+import {QuestionPage} from './QuestionPage.jsx'
+
 
 const MenuLink = ({ label, to }) => (
   <Route path={to} exact={true} children={
@@ -17,44 +21,39 @@ const MenuLink = ({ label, to }) => (
     )
   }/>
 )
-
 const NavBar = () => (
   <ul>
-    <MenuLink to="/" label="Home"/>
-    <MenuLink to="/users" label="Users"/>
-    <MenuLink to="/questions" label="Questions"/>
-    <MenuLink to="/exams" label="Exams"/>
-    <MenuLink to="/subjects" label="Subjects"/>
-    <MenuLink to="/departments" label="Departments"/>
+    <MenuLink to="/teacher" label="Home"/>
+    <MenuLink to="/teacher/questions" label="Questions"/>
+    <MenuLink to="/teacher/exams" label="Exams"/>
+    <MenuLink to="/logout" label="Logout"/>
   </ul>
 )
 
-class MainPage extends React.Component{
+class TeacherPage extends React.Component{
   constructor(props) {
     super(props);
-  }
-  handleUsernameChange(event){
-    this.setState({username : event.target.value})
-  }
-  handlePasswordChange(event){
-    this.setState({password : event.target.value})
   }
   render(){
     return (
       <Router>
       <div>
         <NavBar />
-        <Route path="/" component={HomePage} />
-        <Route path="/users" component={UserPage} />
-        <Route path="/questions" component={QuestionPage} />
-        <Route path="/exams" component={ExamPage} />
-        <Route path="/subjects" component={SubjectPage} />
-        <Route path="/departments" component={DepartmentPage} />
+        <div>
+          <Switch>
+            <Route path="/teacher" exact component={HomePage} />
+            <Route path="/teacher/questions" component={QuestionPage} />
+            <Route path="/teacher/exams" component={ExamPage} />
+            <Route path="/logout" render={function(){
+              this.props.logoutUser()
+              return (<Redirect to={'/login'}/>)
+            }.bind(this)} />
+          </Switch>
+        </div>
       </div>
       </Router>
     )
   }
 }
 
-
-export default MainPage
+export {TeacherPage}

@@ -15,7 +15,11 @@ var localBuild = {
     filename: 'bundle.js'
   },
   module : {
-    loaders : [
+    rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      },
       {
         test : /\.jsx?/,
         include : APP_DIR,
