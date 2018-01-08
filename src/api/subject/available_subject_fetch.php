@@ -13,7 +13,8 @@ $mysqli->query("SET time_zone = '+08:00'");
             subject.description as subject_description,
             subject.id as subject_id,
             concat(user.firstname,' ',user.lastname) as teacher_name,
-            teacher_subject.id as teacher_subject_id
+            teacher_subject.id as teacher_subject_id,
+            user.id as teacher_id
             FROM teacher_subject
             inner join user on teacher_subject.teacher = user.id
             inner join subject on subject.id = teacher_subject.subject

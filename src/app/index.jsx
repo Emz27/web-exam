@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {
@@ -11,7 +12,7 @@ import 'whatwg-fetch'
 
 import {LoginPage} from './LoginPage.jsx'
 import {AdminPage} from './admin/MainPage.jsx'
-// import {TeacherPage} from './teacher/MainPage.jsx'
+import {TeacherPage} from './teacher/MainPage.jsx'
 import {StudentPage} from './student/MainPage.jsx'
 
 const user = {
@@ -92,12 +93,12 @@ class MainPage extends React.Component{
             <AdminPage user={this} logoutUser={this.logoutUser} user={this.state} />
           </div>
         )
-      // case "2":
-      //   return (
-      //     <div>
-      //       <Teacherpage logoutUser={this.logoutUser} user={this.state} />
-      //     </div>
-      //   )
+      case "2":
+        return (
+          <div>
+            <TeacherPage logoutUser={this.logoutUser} user={this.state} />
+          </div>
+        )
       case "3":
         return (
           <div>

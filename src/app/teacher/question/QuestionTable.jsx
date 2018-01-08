@@ -22,7 +22,7 @@ const QuestionTable = (props)=>{
         (
     <tr key={q.question_id}>
       {
-        <Route path={props.match.url+"/exams"} render={()=>{
+        <Route path={"/teacher/exams"} render={()=>{
             return (
               <td>
               <button

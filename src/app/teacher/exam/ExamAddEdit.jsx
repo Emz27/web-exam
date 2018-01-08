@@ -27,19 +27,26 @@ const ExamAddEdit =(props)=>(
                     var selectedOption = event.target.options[event.target.selectedIndex];
                     props.parent.handleInputChange({
                       exam_teacher_subject_id: event.target.value,
-                      question_subject_description: selectedOption.text.slice(0,selectedOption.text.indexOf(" - ")),
-                      exam_subject_description: selectedOption.text.slice(0,selectedOption.text.indexOf(" - ")),
-                      question_teacher_name: selectedOption.text.slice(selectedOption.text.indexOf(" - ")),
+                      question_subject_description: selectedOption.text,
+                      exam_subject_description: selectedOption.text,
                       exam_questions:[]
                     })
 
                   }}>
                   <option value="" disabled></option>
-                  {props.parent.state.available_subjects.map((q,i)=><option key={q.teacher_subject_id} value={q.teacher_subject_id}>{q.subject_description+" - "+q.teacher_name}</option>)}
+                  {
+                    props.parent.state.available_subjects.filter((item)=>{
+                      console.log("teacher_id: "+props.parent.state.teacher_id)
+                      console.log("item teacher_id: "+item.teacher_id)
+                      console.dir(item)
+                      if(item.teacher_id != props.parent.state.teacher_id) return false;
+                      return true;
+                    }).map((q,i)=><option key={q.teacher_subject_id} value={q.teacher_subject_id}>{q.subject_description}</option>)
+                  }
                 </select>
               )
             }
-            else return (<div>{props.parent.state.exam_subject_description+" - "+props.parent.state.exam_teacher_name}</div>)
+            else return (<div>{props.parent.state.exam_subject_description}</div>)
         })()}
       </label>
     </div>
