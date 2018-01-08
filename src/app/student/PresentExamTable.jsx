@@ -20,12 +20,17 @@ const PresentExamTable = (props)=>{
       <td>{moment(props.parent.state.current_time).to(q.exam_date_end)}</td>
       <td>{q.exam_duration+" minutes"}</td>
       <td>
-        <button
-          onClick={(event)=>{
-          }}
-          >
-            Exam
-        </button>
+        {
+          (()=>{
+            console.dir(q);
+            if(q.exam_questions[0].student_answers.length&& moment(props.parent.state.current_time).diff(q.exam_questions[0].student_answers[0].date_created,"minutes")>q.exam_duration){
+              return "Pending"
+            }
+            else return (<button>
+                            <Link to={"/student/exam/"+q.exam_id}>Exam</Link>
+                        </button>)
+          })()
+        }
       </td>
     </tr>
   ));

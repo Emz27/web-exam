@@ -2,12 +2,12 @@
   include("../config.php");
   session_start();
 
-$conn = new mysqli($db_host, $db_username, $db_password, $db_name);
-$conn->query("SET time_zone = '+08:00'");
+$mysqli = new mysqli($db_host, $db_username, $db_password, $db_name);
+$mysqli->query("SET time_zone = '+08:00'");
   $fetch_filter = isset($_POST['fetch_filter'])?$_POST['fetch_filter']:"";
   if($fetch_filter=="") $fetch_filter = isset($_GET['fetch_filter'])?$_GET['fetch_filter']:"";
-  if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+  if ($mysqli->connect_error) {
+    die("Connection failed: " . $mysqli->connect_error);
   }
   $sql = "SELECT
             exam.id as exam_id,
@@ -30,8 +30,8 @@ $conn->query("SET time_zone = '+08:00'");
             left join subject on subject.id = teacher_subject.subject
             $fetch_filter";
   $data = array();
-  $result = $conn->query($sql);
-  echo $conn->error;
+  $result = $mysqli->query($sql);
+  echo $mysqli->error;
   if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()){
       $row['exam_questions'] = array();
@@ -54,12 +54,12 @@ $conn->query("SET time_zone = '+08:00'");
                 left join subject on teacher_subject.subject = subject.id
                 where exam_question.exam = '".$row['exam_id']."'";
 
-      $result1 = $conn->query($sql1);
-      echo $conn->error;
+      $result1 = $mysqli->query($sql1);
+      echo $mysqli->error;
       while($row1 = $result1->fetch_assoc()){
         $row1['question_options'] = array();
         $sql2 = "SELECT * from question_option where question=".$row1['question_id']."";
-        $result2 = $conn->query($sql2);
+        $result2 = $mysqli->query($sql2);
         while($row2 = $result2->fetch_assoc()){
           array_push($row1['question_options'],$row2);
         }
@@ -68,7 +68,7 @@ $conn->query("SET time_zone = '+08:00'");
       array_push($data,$row);
     }
   }
-  $conn->close();
+  $mysqli->close();
 
   echo json_encode($data);
 ?>

@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom'
 
 import {ProfilePage} from './ProfilePage.jsx'
+import {ExamPage} from './ExamPage.jsx'
 
 const MenuLink = ({ label, to }) => (
   <Route path={to} exact={true} children={
@@ -53,6 +54,7 @@ class StudentPage extends React.Component{
 
             }
           } />
+          <Route path="/student/exam/:exam_id" component={ExamPage} />
           <Route path="/logout" render={function(){
             console.log("logout");
             this.props.logoutUser()

@@ -13,26 +13,26 @@
 
   $exam_questions = isset($_POST['exam_questions'])?$_POST['exam_questions']:"";
 
-$conn = new mysqli($db_host, $db_username, $db_password, $db_name);
-$conn->query("SET time_zone = '+08:00'");
+$mysqli = new mysqli($db_host, $db_username, $db_password, $db_name);
+$mysqli->query("SET time_zone = '+08:00'");
 
-  if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+  if ($mysqli->connect_error) {
+    die("Connection failed: " . $mysqli->connect_error);
   }
 
   $sql = "INSERT INTO `exam`(`description`, `type`, `teacher_subject`, `date_start`, `date_end`, `duration`)
               VALUES ('$exam_description', '$exam_type_id', '$exam_teacher_subject_id', '$exam_date_start', '$exam_date_end', '$exam_duration')";
-  $conn->query($sql);
+  $mysqli->query($sql);
 
-  if($conn->error)echo $conn->error.' line 33';
+  if($mysqli->error)echo $mysqli->error.' line 33';
 
-  $id = $conn->insert_id;
+  $id = $mysqli->insert_id;
     foreach ($exam_questions as $value){
       $sql = "INSERT INTO `exam_question`(`exam`, `question`)
                   VALUES ('$id','".$value['question_id']."')";
-      $conn->query($sql);
-      if($conn->error)echo $conn->error.' line 40';
+      $mysqli->query($sql);
+      if($mysqli->error)echo $mysqli->error.' line 40';
     }
-  $conn->close();
+  $mysqli->close();
 
 ?>

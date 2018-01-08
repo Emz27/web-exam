@@ -2,11 +2,11 @@
   include("../config.php");
   session_start();
 
-$conn = new mysqli($db_host, $db_username, $db_password, $db_name);
-$conn->query("SET time_zone = '+08:00'");
+$mysqli = new mysqli($db_host, $db_username, $db_password, $db_name);
+$mysqli->query("SET time_zone = '+08:00'");
 
-  if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+  if ($mysqli->connect_error) {
+    die("Connection failed: " . $mysqli->connect_error);
   }
 
 
@@ -44,8 +44,8 @@ $conn->query("SET time_zone = '+08:00'");
 
 
   $data = array();
-  $result = $conn->query($sql1);
-  echo $conn->error;
+  $result = $mysqli->query($sql1);
+  echo $mysqli->error;
   if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()){
       $row['subject_id'] = explode(',',$row['subject_id'],0);
@@ -55,8 +55,8 @@ $conn->query("SET time_zone = '+08:00'");
       array_push($data,$row);
     }
   }
-  $result = $conn->query($sql2);
-  echo $conn->error;
+  $result = $mysqli->query($sql2);
+  echo $mysqli->error;
   if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()){
       $row['subject_id'] = explode(',',$row['subject_id'],0);
@@ -66,7 +66,7 @@ $conn->query("SET time_zone = '+08:00'");
       array_push($data,$row);
     }
   }
-  $conn->close();
+  $mysqli->close();
 
   echo json_encode($data);
 ?>

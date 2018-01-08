@@ -16,8 +16,8 @@ const FutureExamTable = (props)=>{
       <td>{q.exam_type_description}</td>
       <td>{q.exam_subject_description}</td>
       <td>{q.exam_teacher_name}</td>
-      <td>{moment(props.state.current_time).to(q.exam_date_start)}</td>
-      <td>{moment(props.state.current_time).to(q.exam_date_end)}</td>
+      <td>{moment(props.parent.state.current_time).to(q.exam_date_start)}</td>
+      <td>{moment(props.parent.state.current_time).to(q.exam_date_end)}</td>
       <td>{q.exam_duration+" minutes"}</td>
       <td>
         <button

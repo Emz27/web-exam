@@ -2,11 +2,11 @@
   include("../config.php");
   session_start();
 
-$conn = new mysqli($db_host, $db_username, $db_password, $db_name);
-$conn->query("SET time_zone = '+08:00'");
+$mysqli = new mysqli($db_host, $db_username, $db_password, $db_name);
+$mysqli->query("SET time_zone = '+08:00'");
 
-  if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+  if ($mysqli->connect_error) {
+    die("Connection failed: " . $mysqli->connect_error);
   }
 
   $sql = "SELECT
@@ -20,8 +20,8 @@ $conn->query("SET time_zone = '+08:00'");
             where (teacher_subject.is_active and user.is_active = 1)
             ";
 
-  $result = $conn->query($sql);
-  echo $conn->error;
+  $result = $mysqli->query($sql);
+  echo $mysqli->error;
   $data = array();
   if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()){
@@ -31,7 +31,7 @@ $conn->query("SET time_zone = '+08:00'");
   else {
 
   }
-  $conn->close();
+  $mysqli->close();
 
   echo json_encode($data);
 ?>

@@ -4,18 +4,18 @@
   $id = isset($_POST['id'])?$_POST['id']:"";
   $description = isset($_POST['description'])?$_POST['description']:"";
 
-$conn = new mysqli($db_host, $db_username, $db_password, $db_name);
-$conn->query("SET time_zone = '+08:00'");
+$mysqli = new mysqli($db_host, $db_username, $db_password, $db_name);
+$mysqli->query("SET time_zone = '+08:00'");
 
-  if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+  if ($mysqli->connect_error) {
+    die("Connection failed: " . $mysqli->connect_error);
   }
 
   $sql = "UPDATE department SET description='$description' WHERE id = '$id'";
-  $conn->query($sql);
+  $mysqli->query($sql);
 
-  echo $conn->error;
+  echo $mysqli->error;
 
-  $conn->close();
+  $mysqli->close();
 
 ?>

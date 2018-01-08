@@ -14,26 +14,26 @@
   $question_options = isset($_POST['question_options'])?$_POST['question_options']:array();
   $question_teacher_subject_id = isset($_POST['question_teacher_subject_id'])?$_POST['question_teacher_subject_id']:"";
 
-$conn = new mysqli($db_host, $db_username, $db_password, $db_name);
-$conn->query("SET time_zone = '+08:00'");
+$mysqli = new mysqli($db_host, $db_username, $db_password, $db_name);
+$mysqli->query("SET time_zone = '+08:00'");
 
-  if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+  if ($mysqli->connect_error) {
+    die("Connection failed: " . $mysqli->connect_error);
   }
 
   $sql = "INSERT INTO `question`(`description`, `teacher_subject`, `type`, `point`)
             VALUES ('$question_description','$question_teacher_subject_id','$question_type_id','$question_point')";
-  $conn->query($sql);
+  $mysqli->query($sql);
 
-  if($conn->error)echo $conn->error.' line 33';
-  $id = $conn->insert_id;
+  if($mysqli->error)echo $mysqli->error.' line 33';
+  $id = $mysqli->insert_id;
 
     foreach ($question_options as $value){
       $sql = "INSERT INTO `question_option`( `description`, `is_correct`, `question`)
                 VALUES ('".$value['description']."','".$value['is_correct']."','$id')";
-      $conn->query($sql);
-      if($conn->error)echo $conn->error.' line 40';
+      $mysqli->query($sql);
+      if($mysqli->error)echo $mysqli->error.' line 40';
     }
-  $conn->close();
+  $mysqli->close();
 
 ?>

@@ -19,19 +19,19 @@
     array_push($temp,$value['description']);
   }
 
-$conn = new mysqli($db_host, $db_username, $db_password, $db_name);
-$conn->query("SET time_zone = '+08:00'");
+$mysqli = new mysqli($db_host, $db_username, $db_password, $db_name);
+$mysqli->query("SET time_zone = '+08:00'");
 
-  if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+  if ($mysqli->connect_error) {
+    die("Connection failed: " . $mysqli->connect_error);
   }
 
   $sql = "UPDATE `question` SET `description`='$question_description',
       `teacher_subject`='$question_teacher_subject_id',`type`='$question_type_id',
       `point`='$question_point'
       WHERE id='$question_id'";
-  $conn->query($sql);
-  if($conn->error)echo $conn->error.' line 35';
+  $mysqli->query($sql);
+  if($mysqli->error)echo $mysqli->error.' line 35';
 
     $arr = "'asdfashasdasdgs'";
     if($temp) $arr .= ",'".join("','",$temp)."'";
@@ -41,8 +41,8 @@ $conn->query("SET time_zone = '+08:00'");
              question='$question_id'
              and
              description NOT IN ('asdfsadfsadfasdf',".$arr.")";
-    $conn->query($sql);
-    if($conn->error)echo $conn->error.' line 46';
+    $mysqli->query($sql);
+    if($mysqli->error)echo $mysqli->error.' line 46';
     foreach ($question_options as $value){
       if(isset($value['description'])){
         $d = $value['description'];
@@ -51,8 +51,8 @@ $conn->query("SET time_zone = '+08:00'");
         $sql = "INSERT INTO question_option (id,description,is_correct,question)
                   VALUES ('$qo','$d','$i','$question_id')
                   ON DUPLICATE KEY UPDATE is_correct=VALUES(is_correct)";
-        $conn->query($sql);
-        if($conn->error)echo $conn->error.' line 54';
+        $mysqli->query($sql);
+        if($mysqli->error)echo $mysqli->error.' line 54';
       }
       $sql = "INSERT INTO question_option (description,is_correct,question)
        SELECT * FROM (SELECT '$d' as a, '$i' as b,'$question_id' as c) AS tmp
@@ -60,13 +60,13 @@ $conn->query("SET time_zone = '+08:00'");
            SELECT id FROM question_option
            WHERE question = '$question_id' and description = '$d'
        )";
-      $conn->query($sql);
-    if($conn->error)echo $conn->error.' line 62';
+      $mysqli->query($sql);
+    if($mysqli->error)echo $mysqli->error.' line 62';
     }
 
 
 
 
-  $conn->close();
+  $mysqli->close();
 
 ?>

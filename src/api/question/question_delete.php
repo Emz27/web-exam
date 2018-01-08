@@ -2,17 +2,17 @@
   include("../config.php");
   session_start();
 
-$conn = new mysqli($db_host, $db_username, $db_password, $db_name);
-$conn->query("SET time_zone = '+08:00'");
+$mysqli = new mysqli($db_host, $db_username, $db_password, $db_name);
+$mysqli->query("SET time_zone = '+08:00'");
 
-  if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+  if ($mysqli->connect_error) {
+    die("Connection failed: " . $mysqli->connect_error);
   }
 
   $id = $_POST['question_id'];
 
   $sql = "DELETE from question where id = $id";
-  $conn->query($sql);
-  $conn->close();
+  $mysqli->query($sql);
+  $mysqli->close();
 
 ?>

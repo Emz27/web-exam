@@ -11,16 +11,16 @@
   $data['username'] = $username;
   $data['password'] = $password;
 
-$conn = new mysqli($db_host, $db_username, $db_password, $db_name);
-$conn->query("SET time_zone = '+08:00'");
+$mysqli = new mysqli($db_host, $db_username, $db_password, $db_name);
+$mysqli->query("SET time_zone = '+08:00'");
 
-  if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+  if ($mysqli->connect_error) {
+    die("Connection failed: " . $mysqli->connect_error);
   }
 
   $sql = "SELECT * FROM user WHERE user.username = '$username' AND user.password = '$password'";
 
-  $result = $conn->query($sql);
+  $result = $mysqli->query($sql);
 
   if ($result->num_rows > 0) {
       $row = $result->fetch_assoc();
@@ -36,6 +36,6 @@ $conn->query("SET time_zone = '+08:00'");
       $_SESSION['type'] = $data['type'];
       $_SESSION['date_created'] = $data['date_created'];
   }
-  $conn->close();
+  $mysqli->close();
   echo json_encode($data);
 ?>

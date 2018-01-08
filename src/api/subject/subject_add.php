@@ -5,19 +5,19 @@
   $department = isset($_POST['department'])?$_POST['department']:"";
 
 
-$conn = new mysqli($db_host, $db_username, $db_password, $db_name);
-$conn->query("SET time_zone = '+08:00'");
+$mysqli = new mysqli($db_host, $db_username, $db_password, $db_name);
+$mysqli->query("SET time_zone = '+08:00'");
 
-  if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+  if ($mysqli->connect_error) {
+    die("Connection failed: " . $mysqli->connect_error);
   }
 
   $sql = "INSERT INTO `subject`( `description`,`department`)
   VALUES ('$description','$department')";
-  $conn->query($sql);
+  $mysqli->query($sql);
 
-  echo $conn->error;
+  echo $mysqli->error;
 
-  $conn->close();
+  $mysqli->close();
 
 ?>
