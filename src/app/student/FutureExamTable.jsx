@@ -19,6 +19,35 @@ const FutureExamTable = (props)=>{
       <td>{moment(props.parent.state.current_time).to(q.exam_date_start)}</td>
       <td>{moment(props.parent.state.current_time).to(q.exam_date_end)}</td>
       <td>{q.exam_duration+" minutes"}</td>
+      <td>{
+        (()=>{
+          var total_items=0;
+          q.exam_questions.forEach((item,index)=>{
+            if(item.question_type_description == "Enumeration"){
+              total_items += item.question_options.length*(+item.question_point)
+            }
+            else {
+              total_items += (+item.question_point);
+            }
+          })
+          return (total_items);
+        })()
+
+      }</td>
+      <td>{
+        (()=>{
+          var total_score=0;
+          q.exam_questions.forEach((item,index)=>{
+            if(item.question_type_description == "Enumeration"){
+              total_score += item.question_options.length
+            }
+            else {
+              total_score += 1
+            }
+          })
+          return (total_score);
+        })()
+      }</td>
       <td>
         <button
           onClick={(event)=>{
@@ -41,6 +70,8 @@ const FutureExamTable = (props)=>{
         <th>Date Available</th>
         <th>Date Expire</th>
         <th>Duration</th>
+        <th>Items</th>
+        <th>Total Score</th>
         <th>Action</th>
       </tr>
       {

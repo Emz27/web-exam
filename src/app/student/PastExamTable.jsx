@@ -20,6 +20,46 @@ const PastExamTable = (props)=>{
       <td>{moment(props.parent.state.current_time).to(q.exam_date_start)}</td>
       <td>{moment(props.parent.state.current_time).to(q.exam_date_end)}</td>
       <td>{q.exam_duration+" minutes"}</td>
+      <td>{
+        (()=>{
+          var total_items=0;
+          var answered_items=0;
+          q.exam_questions.forEach((item,index)=>{
+            console.log("items: "+total_items);
+
+            if(item.question_type_description == "Enumeration"){
+              total_items += item.question_options.length*(+item.question_point)
+            }
+            else {
+              total_items += (+item.question_point);
+            }
+            item.student_answers.forEach((itm,i)=>{
+              if(itm.answer != "") answered_items+=1;
+            })
+          })
+          return (answered_items+"/"+total_items);
+        })()
+
+      }</td>
+      <td>{
+        (()=>{
+          var score =0;
+          var total =0;
+          q.exam_questions.forEach((item,index)=>{
+            if(item.question_type_description == "Enumeration"){
+              total += item.question_options.length*(+item.question_point)
+            }
+            else {
+              total += (+item.question_point);
+            }
+            item.student_answers.forEach((itm,i)=>{
+              if(itm.student_answer_is_correct == "1") score+= +item.question_point
+            })
+          })
+          return (score+"/"+total);
+        })()
+
+      }</td>
       <td>
         <button
           onClick={(event)=>{
@@ -42,6 +82,8 @@ const PastExamTable = (props)=>{
         <th>Date Available</th>
         <th>Date Expire</th>
         <th>Duration</th>
+        <th>Answered Items</th>
+        <th>Score</th>
         <th>Action</th>
       </tr>
       {
