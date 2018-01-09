@@ -9,8 +9,8 @@
   $lastname = isset($_POST['lastname'])?$mysqli->real_escape_string($_POST['lastname']):"";
   $middlename = isset($_POST['middlename'])?$mysqli->real_escape_string($_POST['middlename']):"";
   $type = isset($_POST['type'])?$mysqli->real_escape_string($_POST['type']):"";
-  $subject_subject = isset($_POST['subject_subject'])?$mysqli->real_escape_string($_POST['subject_subject']):array();
-  $subject_id = isset($_POST['subject_id'])?$mysqli->real_escape_string($_POST['subject_id']):array();
+  $subject_subject = isset($_POST['subject_subject'])?$_POST['subject_subject']:array();
+  $subject_id = isset($_POST['subject_id'])?$_POST['subject_id']:array();
 
 
   if ($mysqli->connect_error) {

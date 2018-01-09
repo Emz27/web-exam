@@ -14,7 +14,7 @@
   $exam_date_end = isset($_POST['exam_date_end'])?str_replace("T"," ",$_POST['exam_date_end']):"";
   $exam_duration = isset($_POST['exam_duration'])?$mysqli->real_escape_string($_POST['exam_duration']):"";
 
-  $exam_questions = isset($_POST['exam_questions'])?$mysqli->real_escape_string($_POST['exam_questions']):"";
+  $exam_questions = isset($_POST['exam_questions'])?$_POST['exam_questions']:"";
 
   $temp = array();
   foreach($exam_questions as $value){

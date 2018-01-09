@@ -14,7 +14,7 @@
   $question_type_description = isset($_POST['question_type_description'])?$mysqli->real_escape_string($_POST['question_type_description']):"";
   $question_limit = isset($_POST['question_limit'])?$mysqli->real_escape_string($_POST['question_limit']):"";
   $question_point = isset($_POST['question_point'])?$mysqli->real_escape_string($_POST['question_point']):"";
-  $question_options = isset($_POST['question_options'])?$mysqli->real_escape_string($_POST['question_options']):array();
+  $question_options = isset($_POST['question_options'])?$_POST['question_options']:array();
   $question_teacher_subject_id = isset($_POST['question_teacher_subject_id'])?$mysqli->real_escape_string($_POST['question_teacher_subject_id']):"";
   $temp = array();
   foreach($question_options as $value){
@@ -46,8 +46,8 @@
     foreach ($question_options as $value){
       if(isset($value['description'])){
         $d = $value['description'];
-        $i = isset($value['is_correct'])?$value['is_correct']:0;
-        $qo = isset($value['id'])?$value['id']):"";
+        $i = isset($value['is_correct'])?$mysqli->real_escape_string($value['is_correct']):0;
+        $qo = isset($value['id'])?$mysqli->real_escape_string($value['id']):"";
         $sql = "INSERT INTO question_option (id,description,is_correct,question)
                   VALUES ('$qo','$d','$i','$question_id')
                   ON DUPLICATE KEY UPDATE is_correct=VALUES(is_correct)";

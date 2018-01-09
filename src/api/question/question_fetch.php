@@ -5,7 +5,6 @@
 $mysqli = new mysqli($db_host, $db_username, $db_password, $db_name);
 $mysqli->query("SET time_zone = '+08:00'");
   $fetch_filter = isset($_POST['fetch_filter'])?$mysqli->real_escape_string($_POST['fetch_filter']):"";
-  if($fetch_filter=="") $fetch_filter = isset($_GET['fetch_filter'])?$_GET['fetch_filter']):"";
   // if($fetch_filter=="") echo "heyyaaaaaaaaa";
   if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);
@@ -43,5 +42,5 @@ $mysqli->query("SET time_zone = '+08:00'");
   }
   $mysqli->close();
 
-  echo json_encode($data);
+  echo json_encode($data, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE);
 ?>
