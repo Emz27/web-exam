@@ -12,6 +12,7 @@ import {QuestionItem} from './QuestionItem.jsx'
 const ExamSheet = (props)=>{
   const present_exam = props.parent.state.student_present_exams.find(e => e.exam_id == props.parent.props.match.params.exam_id);
   if(!present_exam) return (<div>Exam not found</div>)
+  if(!present_exam.exam_questions.length) return (<div>Exam doesnt have any questions, Contact your administrator</div>)
   if(!present_exam.exam_questions[0].student_answers.length){
     console.log("no answers");
     console.dir(present_exam);
@@ -143,7 +144,7 @@ const ExamSheet = (props)=>{
                 }
               );
   return (
-    <div className="col">
+    <div className="col" style={{maxHeight:"100%",overflow:"auto"}}>
       {items}
     </div>
   )

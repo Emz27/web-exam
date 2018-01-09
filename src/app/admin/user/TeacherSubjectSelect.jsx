@@ -10,10 +10,11 @@ import {
 const TeacherSubjectSelect = (props)=>{
   return (
     <div>
-    <select value={props.value} onChange={(event)=>{
+    <select required value={props.value} onChange={(event)=>{
         props.subject_subject[props.index] = event.target.value
         return props.parent.handleInputChange({subject_subject:props.subject_subject})
       }}>
+      <option value="" disabled></option>
       {
           props.parent.state.subject.map((s,index)=>
             (!props.subject_subject.includes(s.id))?

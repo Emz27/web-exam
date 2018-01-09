@@ -50,7 +50,8 @@ const UserAddEdit = (props)=>{
               (()=>{
                 if(props.parent.state.state_type=="Add"){
                   return (
-                    <select value={props.parent.state.type} onChange={(event)=>{props.parent.handleInputChange({type: event.target.value,subject_subject:[]})}}>
+                    <select required value={props.parent.state.type} onChange={(event)=>{props.parent.handleInputChange({type: event.target.value,subject_subject:[]})}}>
+                      <option value="" disabled></option>
                       <option value="2">Teacher</option>
                       <option value="3">Student</option>
                     </select>

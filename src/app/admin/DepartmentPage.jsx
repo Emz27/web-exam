@@ -110,14 +110,14 @@ class DepartmentPage extends React.Component{
         <td className={"text-center"}>{index+1}</td>
         <td className={"text-center"}>{`${department.description}`}</td>
         <td className={"text-center"}>
-          <button type="button" className="btn btn-outline-dark" 
+          <button type="button" className="btn btn-outline-dark"
             onClick={(event)=>{
               this.handleUpdateButton({id:department.id,description:department.description});
             }}
             >
               Update
           </button>
-          <button type="button" className="btn btn-outline-dark" 
+          <button type="button" className="btn btn-outline-dark"
             onClick={(event)=>{
               this.handleDeleteButton(department.id);
             }}
@@ -150,7 +150,8 @@ class DepartmentPage extends React.Component{
     else {
       return (
         <div>
-        <button type="button" className="btn btn-outline-dark" 
+        <h1>Department</h1>
+        <button type="button" className="btn btn-outline-dark"
           onClick={(event)=>{
             this.handleAddButton();
           }}

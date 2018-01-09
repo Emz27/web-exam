@@ -19,7 +19,7 @@ const ExamAddEdit =(props)=>(
         {(()=>{
             if(props.parent.state.exam_state_type=="Add"){
               return (
-                <select value={props.parent.state.exam_teacher_subject_id}
+                <select required value={props.parent.state.exam_teacher_subject_id}
                   onChange={(event)=>{
                     console.log("teacher_id exams : "+props.parent.state.exam_teacher_subject_id);
                     console.log("select value: "+event.target.value);
@@ -55,7 +55,7 @@ const ExamAddEdit =(props)=>(
         Exam Type
         {(()=>{
         return (
-          <select value={props.parent.state.exam_type_id} onChange={(event)=>{props.parent.handleInputChange({exam_type_id: event.target.value})}}>
+          <select required value={props.parent.state.exam_type_id} onChange={(event)=>{props.parent.handleInputChange({exam_type_id: event.target.value})}}>
             <option value="" disabled></option>
             {props.parent.state.exam_types.map((q,i)=><option key={q.id} value={q.id}>{q.description}</option>)}
           </select>

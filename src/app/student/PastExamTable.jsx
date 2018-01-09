@@ -60,14 +60,6 @@ const PastExamTable = (props)=>{
         })()
 
       }</td>
-      <td className={"text-center"}>
-        <button type="button" className="btn btn-outline-dark"
-          onClick={(event)=>{
-          }}
-          >
-            View
-        </button>
-      </td>
     </tr>
   ));
   return (
@@ -84,7 +76,6 @@ const PastExamTable = (props)=>{
         <th className={"text-center"}>Duration</th>
         <th className={"text-center"}>Answered Items</th>
         <th className={"text-center"}>Score</th>
-        <th className={"text-center"}>Action</th>
       </tr>
       {
         items

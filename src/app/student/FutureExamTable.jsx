@@ -48,14 +48,6 @@ const FutureExamTable = (props)=>{
           return (total_score);
         })()
       }</td>
-      <td className={"text-center"}>
-        <button type="button" className="btn btn-outline-dark"
-          onClick={(event)=>{
-          }}
-          >
-            Exam
-        </button>
-      </td>
     </tr>
   ));
   return (
@@ -72,7 +64,6 @@ const FutureExamTable = (props)=>{
         <th className={"text-center"}>Duration</th>
         <th className={"text-center"}>Items</th>
         <th className={"text-center"}>Total Score</th>
-        <th className={"text-center"}>Action</th>
       </tr>
       {
         items

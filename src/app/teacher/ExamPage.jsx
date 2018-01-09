@@ -210,6 +210,7 @@ handleQuestionAddButton(question){
   render(){
     return (
       <div>
+        <h1>Exam</h1>
         <ExamContainer parent={this} />
       </div>
     )

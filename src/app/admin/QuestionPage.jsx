@@ -112,7 +112,10 @@ class QuestionPage extends React.Component{
   }
   render(){
     return (
-      <QuestionContainer parent={this} />
+      <div>
+        <h1>Question</h1>
+        <QuestionContainer parent={this} />
+      </div>
     )
   }
 }

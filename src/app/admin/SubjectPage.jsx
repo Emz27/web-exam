@@ -133,7 +133,7 @@ class SubjectPage extends React.Component{
         <td className={"text-center"}>{`${subject.description}`}</td>
         <td className={"text-center"}>{`${subject.department_description}`}</td>
         <td className={"text-center"}>
-          <button type="button" className="btn btn-outline-dark" 
+          <button type="button" className="btn btn-outline-dark"
             onClick={(event)=>{
               this.handleUpdateButton({
                 id:subject.id,
@@ -144,7 +144,7 @@ class SubjectPage extends React.Component{
             >
               Update
           </button>
-          <button type="button" className="btn btn-outline-dark" 
+          <button type="button" className="btn btn-outline-dark"
             onClick={(event)=>{
               this.handleDeleteButton(subject.id);
             }}
@@ -168,7 +168,8 @@ class SubjectPage extends React.Component{
             <div>
               <label>
                 Department
-              <select value={this.state.department} onChange={(event)=>{this.handleInputChange({department: event.target.value})}}>
+              <select required value={this.state.department} onChange={(event)=>{this.handleInputChange({department: event.target.value})}}>
+                <option value="" disabled></option>
                 {
                   this.state.departments.map((department,index)=>
                     <option key={index} value={department.id}>{department.description}</option>
@@ -190,7 +191,8 @@ class SubjectPage extends React.Component{
     else {
       return (
         <div>
-        <button type="button" className="btn btn-outline-dark" 
+          <h1>Subject</h1>
+        <button type="button" className="btn btn-outline-dark"
           onClick={(event)=>{
             this.handleAddButton();
           }}

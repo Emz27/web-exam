@@ -162,7 +162,8 @@ class UserPage extends React.Component{
     else {
       return (
         <div>
-        <button type="button" className="btn btn-outline-dark" 
+          <h1>User</h1>
+        <button type="button" className="btn btn-outline-dark"
           onClick={(event)=>{
             this.handleAddButton();
           }}
