@@ -73,7 +73,7 @@ const UserAddEdit = (props)=>{
                   return (
                     <div>
                       {select}
-                      <button onClick={(event)=>{
+                      <button type="button" className="btn btn-outline-dark"  onClick={(event)=>{
                         event.preventDefault();
                         if(props.parent.state.subject_subject.length >= props.parent.state.subject.length){
 
@@ -93,7 +93,7 @@ const UserAddEdit = (props)=>{
                   return (
                     <div>
                       {select}
-                      <button onClick={(event)=>{
+                      <button type="button" className="btn btn-outline-dark"  onClick={(event)=>{
                         event.preventDefault();
                         if(props.parent.state.subject_subject.length >= props.parent.state.available_subject.length){}
                         else props.parent.handleInputChange({subject_subject:[...props.parent.state.subject_subject,""]});
@@ -107,10 +107,10 @@ const UserAddEdit = (props)=>{
             }
           </label>
         </div>
-        <button onClick={(event)=>{props.parent.handleCancelButton(event);}}>
+        <button type="button" className="btn btn-outline-dark"  onClick={(event)=>{props.parent.handleCancelButton(event);}}>
             Cancel
         </button>
-        <button type="submit" onClick={(event)=>{props.parent.handleSubmitButton(event);}}>
+        <button type="button" className="btn btn-outline-dark"  type="submit" onClick={(event)=>{props.parent.handleSubmitButton(event);}}>
             Submit
         </button>
       </form>

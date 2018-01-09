@@ -11,23 +11,23 @@ const ExamTable = (props)=>{
   const items = props.parent.state.exams.map((q,index)=>
         (
     <tr key={q.exam_id}>
-      <td>{index+1}</td>
-      <td>{q.exam_description}</td>
-      <td>{q.exam_type_description}</td>
-      <td>{q.exam_subject_description}</td>
-      <td>{q.exam_teacher_name}</td>
-      <td>{q.exam_date_start}</td>
-      <td>{q.exam_date_end}</td>
-      <td>{q.exam_duration+" minutes"}</td>
-      <td>
-        <button
+      <td className={"text-center"}>{index+1}</td>
+      <td className={"text-center"}>{q.exam_description}</td>
+      <td className={"text-center"}>{q.exam_type_description}</td>
+      <td className={"text-center"}>{q.exam_subject_description}</td>
+      <td className={"text-center"}>{q.exam_teacher_name}</td>
+      <td className={"text-center"}>{q.exam_date_start}</td>
+      <td className={"text-center"}>{q.exam_date_end}</td>
+      <td className={"text-center"}>{q.exam_duration+" minutes"}</td>
+      <td className={"text-center"}>
+        <button type="button" className="btn btn-outline-dark" 
           onClick={(event)=>{
             return props.parent.handleExamUpdateButton(q);
           }}
           >
             Update
         </button>
-        <button
+        <button type="button" className="btn btn-outline-dark" 
           onClick={(event)=>{
             props.parent.handleExamDeleteButton(q.exam_id);
           }}
@@ -39,24 +39,24 @@ const ExamTable = (props)=>{
   ));
   return (
     <div>
-      <button
+      <button type="button" className="btn btn-outline-dark" 
         onClick={
           (event)=>{
             props.parent.setState({exam_state_type:"Add",question_state_type:"View"})
           }
         }
       >Add Exam</button>
-    <table>
+    <table className={"table"}>
       <tr>
-        <th>#</th>
-        <th>Description</th>
-        <th>Exam Type</th>
-        <th>Subject</th>
-        <th>Teacher</th>
-        <th>Date Available</th>
-        <th>Date Expire</th>
-        <th>Duration</th>
-        <th>Action</th>
+        <th className={"text-center"}>#</th>
+        <th className={"text-center"}>Description</th>
+        <th className={"text-center"}>Exam Type</th>
+        <th className={"text-center"}>Subject</th>
+        <th className={"text-center"}>Teacher</th>
+        <th className={"text-center"}>Date Available</th>
+        <th className={"text-center"}>Date Expire</th>
+        <th className={"text-center"}>Duration</th>
+        <th className={"text-center"}>Action</th>
       </tr>
       {
         items

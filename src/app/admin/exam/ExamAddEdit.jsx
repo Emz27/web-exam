@@ -103,10 +103,10 @@ const ExamAddEdit =(props)=>(
         required
       />
     </div>
-    <button onClick={(event)=>{props.parent.handleExamCancelButton(event);}}>
+    <button type="button" className="btn btn-outline-dark"  onClick={(event)=>{props.parent.handleExamCancelButton(event);}}>
         Cancel
     </button>
-    <button type="submit">
+    <button type="button" className="btn btn-outline-dark"  type="submit">
         Submit Exam
     </button>
   </form>

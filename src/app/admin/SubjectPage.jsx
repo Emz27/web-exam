@@ -129,11 +129,11 @@ class SubjectPage extends React.Component{
   render(){
     var items = this.state.subjects.map((subject,index)=>(
       <tr key={subject.id}>
-        <td>{index+1}</td>
-        <td>{`${subject.description}`}</td>
-        <td>{`${subject.department_description}`}</td>
-        <td>
-          <button
+        <td className={"text-center"}>{index+1}</td>
+        <td className={"text-center"}>{`${subject.description}`}</td>
+        <td className={"text-center"}>{`${subject.department_description}`}</td>
+        <td className={"text-center"}>
+          <button type="button" className="btn btn-outline-dark" 
             onClick={(event)=>{
               this.handleUpdateButton({
                 id:subject.id,
@@ -144,7 +144,7 @@ class SubjectPage extends React.Component{
             >
               Update
           </button>
-          <button
+          <button type="button" className="btn btn-outline-dark" 
             onClick={(event)=>{
               this.handleDeleteButton(subject.id);
             }}
@@ -177,10 +177,10 @@ class SubjectPage extends React.Component{
               </select>
               </label>
             </div>
-            <button onClick={(event)=>{this.handleCancelButton(event);}}>
+            <button type="button" className="btn btn-outline-dark"  onClick={(event)=>{this.handleCancelButton(event);}}>
                 Cancel
             </button>
-            <button type="submit" onClick={(event)=>{this.handleSubmitButton(event);}}>
+            <button type="button" className="btn btn-outline-dark"  type="submit" onClick={(event)=>{this.handleSubmitButton(event);}}>
                 Submit
             </button>
           </form>
@@ -190,16 +190,16 @@ class SubjectPage extends React.Component{
     else {
       return (
         <div>
-        <button
+        <button type="button" className="btn btn-outline-dark" 
           onClick={(event)=>{
             this.handleAddButton();
           }}
           >
             Add
         </button>
-        <table>
+        <table className={"table"}>
           <tr>
-            <th>#</th><th>Description</th><th>Department</th><th>Action</th>
+            <th className={"text-center"}>#</th><th className={"text-center"}>Description</th><th className={"text-center"}>Department</th><th className={"text-center"}>Action</th>
           </tr>
           {
             items

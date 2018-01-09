@@ -107,17 +107,17 @@ class DepartmentPage extends React.Component{
   render(){
     var items = this.state.departments.map((department,index)=>(
       <tr key={department.id}>
-        <td>{index+1}</td>
-        <td>{`${department.description}`}</td>
-        <td>
-          <button
+        <td className={"text-center"}>{index+1}</td>
+        <td className={"text-center"}>{`${department.description}`}</td>
+        <td className={"text-center"}>
+          <button type="button" className="btn btn-outline-dark" 
             onClick={(event)=>{
               this.handleUpdateButton({id:department.id,description:department.description});
             }}
             >
               Update
           </button>
-          <button
+          <button type="button" className="btn btn-outline-dark" 
             onClick={(event)=>{
               this.handleDeleteButton(department.id);
             }}
@@ -137,10 +137,10 @@ class DepartmentPage extends React.Component{
                 onChange={(event)=>{this.handleInputChange({description: event.target.value})}}
               />
               </div>
-            <button onClick={(event)=>{this.handleCancelButton(event);}}>
+            <button type="button" className="btn btn-outline-dark"  onClick={(event)=>{this.handleCancelButton(event);}}>
                 Cancel
             </button>
-            <button type="submit" onClick={(event)=>{this.handleSubmitButton(event);}}>
+            <button type="button" className="btn btn-outline-dark"  type="submit" onClick={(event)=>{this.handleSubmitButton(event);}}>
                 Submit
             </button>
           </form>
@@ -150,16 +150,16 @@ class DepartmentPage extends React.Component{
     else {
       return (
         <div>
-        <button
+        <button type="button" className="btn btn-outline-dark" 
           onClick={(event)=>{
             this.handleAddButton();
           }}
           >
             Add
         </button>
-        <table>
+        <table className={"table"}>
           <tr>
-            <th>#</th><th>Description</th><th>Action</th>
+            <th className={"text-center"}>#</th><th className={"text-center"}>Description</th><th className={"text-center"}>Action</th>
           </tr>
           {
             items

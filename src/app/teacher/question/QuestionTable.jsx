@@ -24,8 +24,8 @@ const QuestionTable = (props)=>{
       {
         <Route path={"/teacher/exams"} render={()=>{
             return (
-              <td>
-              <button
+              <td className={"text-center"}>
+              <button type="button" className="btn btn-outline-dark"
                 onClick={
                   (event)=>{
                     props.parent.setState({
@@ -40,22 +40,22 @@ const QuestionTable = (props)=>{
           }
         } />
       }
-      <td>{index+1}</td>
-      <td>{q.question_description}</td>
-      <td>{q.question_subject_description}</td>
-      <td>{q.question_teacher_name}</td>
-      <td>{q.question_type_description}</td>
-      <td>{q.question_point}</td>
-      <td>{q.question_options.length}</td>
-      <td>
-        <button
+      <td className={"text-center"}>{index+1}</td>
+      <td className={"text-center"}>{q.question_description}</td>
+      <td className={"text-center"}>{q.question_subject_description}</td>
+      <td className={"text-center"}>{q.question_teacher_name}</td>
+      <td className={"text-center"}>{q.question_type_description}</td>
+      <td className={"text-center"}>{q.question_point}</td>
+      <td className={"text-center"}>{q.question_options.length}</td>
+      <td className={"text-center"}>
+        <button type="button" className="btn btn-outline-dark"
           onClick={(event)=>{
             props.parent.handleQuestionUpdateButton(q);
           }}
           >
             Update
         </button>
-        <button
+        <button type="button" className="btn btn-outline-dark"
           onClick={(event)=>{
             props.parent.handleQuestionDeleteButton(q.question_id);
           }}
@@ -66,18 +66,17 @@ const QuestionTable = (props)=>{
     </tr>
   ));
   return (
-    <table>
+    <table className={"table"}>
       <tr>
-        <Route path={props.match.url+"/exams"} render={()=><th> </th>} />
-        <th>#</th>
-        <th>Description</th>
-        <th>Subject</th>
-        <th>Author</th>
-        <th>Type</th>
-        <th>Exam Type</th>
-        <th>Points</th>
-        <th># Options</th>
-        <th>Action</th>
+        <Route path={props.match.url+"/exams"} render={()=><th className={"text-center"}> </th>} />
+        <th className={"text-center"}>#</th>
+        <th className={"text-center"}>Description</th>
+        <th className={"text-center"}>Subject</th>
+        <th className={"text-center"}>Author</th>
+        <th className={"text-center"}>Type</th>
+        <th className={"text-center"}>Points</th>
+        <th className={"text-center"}># Options</th>
+        <th className={"text-center"}>Action</th>
       </tr>
       {
         items

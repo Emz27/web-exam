@@ -10,19 +10,19 @@ import {
 const UserTable = (props)=>{
   var items = props.parent.state.users.map((user,index)=>(
     <tr key={user.id}>
-      <td>{index+1}</td>
-      <td>{`${user.firstname} ${user.middlename} ${user.lastname}`}</td>
-      <td>{user.type_description}</td>
-      <td>{user.username}</td>
-      <td>
-        <button
+      <td className={"text-center"}>{index+1}</td>
+      <td className={"text-center"}>{`${user.firstname} ${user.middlename} ${user.lastname}`}</td>
+      <td className={"text-center"}>{user.type_description}</td>
+      <td className={"text-center"}>{user.username}</td>
+      <td className={"text-center"}>
+        <button type="button" className="btn btn-outline-dark" 
           onClick={(event)=>{
             props.parent.handleUpdateButton(user);
           }}
           >
             Update
         </button>
-        <button
+        <button type="button" className="btn btn-outline-dark" 
           onClick={(event)=>{
             props.parent.handleDeleteButton(user.id);
           }}
@@ -34,9 +34,9 @@ const UserTable = (props)=>{
   ));
   return (
     <div>
-    <table>
+    <table className={"table"}>
       <tr>
-        <th>#</th><th>Name</th><th>Type</th><th>Username</th><th>Action</th>
+        <th className={"text-center"}>#</th><th className={"text-center"}>Name</th><th className={"text-center"}>Type</th><th className={"text-center"}>Username</th><th className={"text-center"}>Action</th>
       </tr>
       {
         items

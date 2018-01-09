@@ -55,34 +55,39 @@ class LoginPage extends React.Component{
   }
   render(){
     return (
-      <Router>
-      <div>
-      <form onSubmit={this.handleLogin}>
-        <input
-          type="text"
-          placeholder="Username"
-          value={this.state.username}
-          onChange={(event)=>{
-            var input ={};
-            input.username = event.target.value
-            this.handleTextChange(input)
-          }}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={this.state.password}
-          onChange={(event)=>{
-            var input ={};
-            input.password = event.target.value
-            this.handleTextChange(input)
-          }}
-        />
-        <input type="submit" value="Submit" />
-      </form>
-      </div>
 
-      </Router>
+      <form onSubmit={this.handleLogin} class="form-signin">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputEmail" class="sr-only">Username</label>
+          <input
+            id="inputEmail"
+            type="text"
+            className="form-control"
+            placeholder="Username"
+            value={this.state.username}
+            onChange={(event)=>{
+              var input ={};
+              input.username = event.target.value
+              this.handleTextChange(input)
+            }}
+          />
+        <label for="inputPassword" class="sr-only">Password</label>
+          <input
+            id="inputPassword"
+            className="form-control"
+            type="password"
+            placeholder="Password"
+            value={this.state.password}
+            onChange={(event)=>{
+              var input ={};
+              input.password = event.target.value
+              this.handleTextChange(input)
+            }}
+            required
+          />
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+
     )
   }
 }

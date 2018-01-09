@@ -34,7 +34,7 @@ const ExamQuestion = (props)=>{
       {
         multipleChoice.map((item,index)=>
           <li>{item.question_description}
-            <button
+            <button type="button" className="btn btn-outline-dark" 
               onClick={
                 (event)=>{
                   removeItemWithThisValue(exam_questions,item.question_id)
@@ -55,7 +55,7 @@ const ExamQuestion = (props)=>{
       {
         trueFalse.map((item,index)=>
           <li>{item.question_description}
-            <button
+            <button type="button" className="btn btn-outline-dark" 
               onClick={
                 (event)=>{
                   removeItemWithThisValue(exam_questions,item.question_id)
@@ -76,7 +76,7 @@ const ExamQuestion = (props)=>{
       {
         identification.map((item,index)=>
           <li>{item.question_description}
-            <button
+            <button type="button" className="btn btn-outline-dark" 
               onClick={
                 (event)=>{
                   removeItemWithThisValue(exam_questions,item.question_id)
@@ -104,7 +104,7 @@ const ExamQuestion = (props)=>{
       {
         enumeration.map((item,index)=>
           <li key={item.question_id}>{item.question_description}
-            <button
+            <button type="button" className="btn btn-outline-dark" 
               onClick={
                 (event)=>{
                   removeItemWithThisValue(exam_questions,item.question_id)

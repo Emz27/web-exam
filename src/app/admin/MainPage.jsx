@@ -17,22 +17,30 @@ import {UserPage} from './UserPage.jsx'
 const MenuLink = ({ label, to }) => (
   <Route path={to} exact={true} children={
     ({ match }) => (
-      <li className={match ? 'active' : ''}>
-        {match ? '> ' : ''}<Link to={to}>{label}</Link>
+      <li className={"nav-item "+ (match ? 'active' : '')}>
+        <Link to={to}><a href="#" className="nav-link">{label}</a></Link>
       </li>
     )
   }/>
 )
-const NavBar = () => (
-  <ul>
+const NavBar = (props) => (
+<nav className="navbar navbar-dark bg-dark navbar-expand-lg">
+  <a className="navbar-brand" href="#">Informatics Exam System</a>
+  <ul className="navbar-nav mr-auto">
     <MenuLink to="/admin" label="Home"/>
     <MenuLink to="/admin/users" label="Users"/>
     <MenuLink to="/admin/questions" label="Questions"/>
     <MenuLink to="/admin/exams" label="Exams"/>
     <MenuLink to="/admin/subjects" label="Subjects"/>
     <MenuLink to="/admin/departments" label="Departments"/>
-    <MenuLink to="/logout" label="Logout"/>
   </ul>
+  <ul className="nav navbar-nav navbar-right">
+    <li><span class="navbar-text">
+      Logged in as: {props.user.firstname}
+    </span></li>
+    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span><MenuLink to="/logout" label="Logout"/></a></li>
+  </ul>
+</nav>
 )
 
 class AdminPage extends React.Component{
@@ -43,7 +51,7 @@ class AdminPage extends React.Component{
     return (
       <Router>
       <div>
-        <NavBar />
+        <NavBar user={this.props.user} />
         <div>
           <Switch>
             <Route path="/admin" exact component={HomePage} />

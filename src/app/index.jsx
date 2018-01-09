@@ -89,28 +89,28 @@ class MainPage extends React.Component{
     switch(this.state.type){
       case "1":
         return (
-          <div>
-            <AdminPage user={this} logoutUser={this.logoutUser} user={this.state} />
-          </div>
+
+            <AdminPage user={this.state} logoutUser={this.logoutUser} user={this.state} />
+
         )
       case "2":
         return (
-          <div>
+
             <TeacherPage logoutUser={this.logoutUser} user={this.state} />
-          </div>
+
         )
       case "3":
         return (
-          <div>
+
             <StudentPage logoutUser={this.logoutUser} user={this.state} />
-          </div>
+
         )
       default:{
         // user not logged
         return (
-          <div>
+
               <LoginPage loginUser={this.loginUser} user={this.state} />
-          </div>
+
         )
       }
     }

@@ -135,7 +135,7 @@ const QuestionAddEdit =(props)=>(
             return (
               <div>
                 {input}
-                <button onClick={(event)=>{
+                <button type="button" className="btn btn-outline-dark"  onClick={(event)=>{
                   event.preventDefault();
                   var add={
                     description:"",
@@ -162,10 +162,10 @@ const QuestionAddEdit =(props)=>(
         }
       </label>
     </div>
-    <button onClick={(event)=>{props.parent.handleQuestionCancelButton(event);}}>
+    <button type="button" className="btn btn-outline-dark"  onClick={(event)=>{props.parent.handleQuestionCancelButton(event);}}>
         Cancel
     </button>
-    <button type="submit">
+    <button type="button" className="btn btn-outline-dark"  type="submit">
         Submit Question
     </button>
   </form>

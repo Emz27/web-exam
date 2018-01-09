@@ -19,7 +19,7 @@ const QuestionContainer = (props)=>{
   else {
     return (
       <div>
-      <button
+      <button type="button" className="btn btn-outline-dark" 
         onClick={(event)=>{
           props.parent.handleQuestionAddButton();
         }}

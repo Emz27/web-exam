@@ -33,7 +33,7 @@ const TeacherSubjectSelect = (props)=>{
       }
       )()}
     </select>
-    <button onClick={(event)=>{
+    <button type="button" className="btn btn-outline-dark"  onClick={(event)=>{
       props.subject_subject.splice(props.index, 1);
       props.parent.handleInputChange({subject_subject:props.subject_subject});
       event.preventDefault();

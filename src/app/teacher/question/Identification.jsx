@@ -21,7 +21,7 @@ const Identification = (props)=>{
       />
       </label>
     </div>
-    <button onClick={(event)=>{
+    <button type="button" className="btn btn-outline-dark"  onClick={(event)=>{
       event.preventDefault()
       props.question_options.splice(props.index, 1)
       props.parent.handleInputChange({question_options:props.question_options})

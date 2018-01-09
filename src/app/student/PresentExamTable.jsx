@@ -12,14 +12,14 @@ const PresentExamTable = (props)=>{
   const items = props.parent.state.student_present_exams.map((q,index)=>
         (
     <tr key={q.exam_id}>
-      <td>{index+1}</td>
-      <td>{q.exam_type_description}</td>
-      <td>{q.exam_subject_description}</td>
-      <td>{q.exam_teacher_name}</td>
-      <td>{moment(props.parent.state.current_time).to(q.exam_date_start)}</td>
-      <td>{moment(props.parent.state.current_time).to(q.exam_date_end)}</td>
-      <td>{q.exam_duration+" minutes"}</td>
-      <td>{
+      <td className={"text-center"}>{index+1}</td>
+      <td className={"text-center"}>{q.exam_type_description}</td>
+      <td className={"text-center"}>{q.exam_subject_description}</td>
+      <td className={"text-center"}>{q.exam_teacher_name}</td>
+      <td className={"text-center"}>{moment(props.parent.state.current_time).to(q.exam_date_start)}</td>
+      <td className={"text-center"}>{moment(props.parent.state.current_time).to(q.exam_date_end)}</td>
+      <td className={"text-center"}>{q.exam_duration+" minutes"}</td>
+      <td className={"text-center"}>{
         (()=>{
           var total_items=0;
           var answered_items=0;
@@ -40,7 +40,7 @@ const PresentExamTable = (props)=>{
         })()
 
       }</td>
-      <td>{
+      <td className={"text-center"}>{
         (()=>{
           var total_score=0;
           q.exam_questions.forEach((item,index)=>{
@@ -54,7 +54,7 @@ const PresentExamTable = (props)=>{
           return (total_score);
         })()
       }</td>
-      <td>
+      <td className={"text-center"}>
         {
           (()=>{
             console.dir(q);
@@ -63,7 +63,7 @@ const PresentExamTable = (props)=>{
               return "Results Pending"
             }
             else exam_state = "Review Answers"
-            return (<button>
+            return (<button type="button" className="btn btn-outline-dark" >
                         <Link to={"/student/exam/"+q.exam_id}>{exam_state}</Link>
                     </button>)
           })()
@@ -74,18 +74,18 @@ const PresentExamTable = (props)=>{
   return (
     <div>
       Present Exam
-    <table>
+    <table className={"table"}>
       <tr>
-        <th>#</th>
-        <th>Exam Type</th>
-        <th>Subject</th>
-        <th>Teacher</th>
-        <th>Date Available</th>
-        <th>Date Expire</th>
-        <th>Duration</th>
-        <th>Answered Items</th>
-        <th>Total Score</th>
-        <th>Action</th>
+        <th className={"text-center"}>#</th>
+        <th className={"text-center"}>Exam Type</th>
+        <th className={"text-center"}>Subject</th>
+        <th className={"text-center"}>Teacher</th>
+        <th className={"text-center"}>Date Available</th>
+        <th className={"text-center"}>Date Expire</th>
+        <th className={"text-center"}>Duration</th>
+        <th className={"text-center"}>Answered Items</th>
+        <th className={"text-center"}>Total Score</th>
+        <th className={"text-center"}>Action</th>
       </tr>
       {
         items
