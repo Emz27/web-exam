@@ -1,11 +1,12 @@
 <?php
   include("../config.php");
   session_start();
-  $id = isset($_POST['id'])?$_POST['id']:"";
-  $description = isset($_POST['description'])?$_POST['description']:"";
+  $mysqli = new mysqli($db_host, $db_username, $db_password, $db_name);
+  $mysqli->query("SET time_zone = '+08:00'");
 
-$mysqli = new mysqli($db_host, $db_username, $db_password, $db_name);
-$mysqli->query("SET time_zone = '+08:00'");
+  $id = isset($_POST['id'])?$mysqli->real_escape_string($_POST['id']):"";
+  $description = isset($_POST['description'])?$mysqli->real_escape_string($_POST['description']):"";
+
 
   if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);

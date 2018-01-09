@@ -1,14 +1,14 @@
 <?php
   include("../config.php");
   session_start();
+  $mysqli = new mysqli($db_host, $db_username, $db_password, $db_name);
+  $mysqli->query("SET time_zone = '+08:00'");
 
   $student_id = $_SESSION['id'];
-  $exam_id = isset($_POST['exam_id'])?$_POST['exam_id']:"";
+  $exam_id = isset($_POST['exam_id'])?$mysqli->real_escape_string($_POST['exam_id']):"";
 
   $temp = array();
 
-  $mysqli = new mysqli($db_host, $db_username, $db_password, $db_name);
-  $mysqli->query("SET time_zone = '+08:00'");
 
   if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);

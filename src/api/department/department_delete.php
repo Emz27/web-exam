@@ -9,7 +9,7 @@ $mysqli->query("SET time_zone = '+08:00'");
     die("Connection failed: " . $mysqli->connect_error);
   }
 
-  $id = $_POST['id'];
+  $id = $mysqli->real_escape_string($_POST['id']);
 
   $sql = "DELETE from department where id = $id";
   $mysqli->query($sql);

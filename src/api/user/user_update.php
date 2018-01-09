@@ -1,18 +1,18 @@
 <?php
   include("../config.php");
   session_start();
-  $id = isset($_POST['id'])?$_POST['id']:"";
-  $username = isset($_POST['username'])?$_POST['username']:"";
-  $password = isset($_POST['password'])?$_POST['password']:"";
-  $firstname = isset($_POST['firstname'])?$_POST['firstname']:"";
-  $lastname = isset($_POST['lastname'])?$_POST['lastname']:"";
-  $middlename = isset($_POST['middlename'])?$_POST['middlename']:"";
-  $type = isset($_POST['type'])?$_POST['type']:"";
-  $subject_subject = isset($_POST['subject_subject'])?$_POST['subject_subject']:array();
-  $subject_id = isset($_POST['subject_id'])?$_POST['subject_id']:array();
+  $mysqli = new mysqli($db_host, $db_username, $db_password, $db_name);
+  $mysqli->query("SET time_zone = '+08:00'");
+  $id = isset($_POST['id'])?$mysqli->real_escape_string($_POST['id']):"";
+  $username = isset($_POST['username'])?$mysqli->real_escape_string($_POST['username']):"";
+  $password = isset($_POST['password'])?$mysqli->real_escape_string($_POST['password']):"";
+  $firstname = isset($_POST['firstname'])?$mysqli->real_escape_string($_POST['firstname']):"";
+  $lastname = isset($_POST['lastname'])?$mysqli->real_escape_string($_POST['lastname']):"";
+  $middlename = isset($_POST['middlename'])?$mysqli->real_escape_string($_POST['middlename']):"";
+  $type = isset($_POST['type'])?$mysqli->real_escape_string($_POST['type']):"";
+  $subject_subject = isset($_POST['subject_subject'])?$mysqli->real_escape_string($_POST['subject_subject']):array();
+  $subject_id = isset($_POST['subject_id'])?$mysqli->real_escape_string($_POST['subject_id']):array();
 
-$mysqli = new mysqli($db_host, $db_username, $db_password, $db_name);
-$mysqli->query("SET time_zone = '+08:00'");
 
   if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);
