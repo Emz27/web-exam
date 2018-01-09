@@ -48,10 +48,9 @@ class StudentPage extends React.Component{
   }
   render(){
     return (
-      <Router>
-      <div>
+      <Router >
+        <div className="col d-flex flex-column align-items-stretch p-0 m-0 h-100">
         <NavBar user={this.props.user} />
-        <div>
         <Switch>
           <Route path="/student/profile"  render={
             ()=>{
@@ -71,7 +70,6 @@ class StudentPage extends React.Component{
 
         </Switch>
         </div>
-      </div>
       </Router>
     )
   }

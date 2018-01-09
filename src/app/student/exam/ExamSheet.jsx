@@ -58,7 +58,6 @@ const ExamSheet = (props)=>{
                                   return (
                                     <li key={o.id}>
                                       <label>
-                                        {o.description}
                                         <input type="radio" name={o.id}
                                            value={o.description}
                                            checked={q.student_answers.length && (o.description == q.student_answers[0].answer)}
@@ -69,6 +68,7 @@ const ExamSheet = (props)=>{
                                                                                 duration:present_exam.exam_duration
                                                                               })}
                                            />
+                                        {" "+o.description}
                                       </label>
                                     </li>
                                   )
@@ -143,8 +143,8 @@ const ExamSheet = (props)=>{
                 }
               );
   return (
-    <div>
-    {items}
+    <div className="col">
+      {items}
     </div>
   )
 }

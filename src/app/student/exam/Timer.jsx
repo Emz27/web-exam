@@ -30,8 +30,13 @@ class Timer extends React.Component{
       .done((data)=>{
         // console.log("start time: "+this.props.start_time);
         // console.log("current time: "+ data)
+        var duration = (this.props.duration*60)*1000
+        var difference = moment(data).diff(moment(this.props.start_time))
+        var h = moment.duration(duration - difference).hours()
+        var m = moment.duration(duration - difference).minutes()
+        var s = moment.duration(duration - difference).seconds()
         this.setState(()=>({
-          remaining_time: this.props.duration - moment(data).diff(moment(this.props.start_time),"minutes")
+          remaining_time: h+" : "+m+" : "+s
         }));
       })
       .fail(function(xhr) {
@@ -41,7 +46,9 @@ class Timer extends React.Component{
     render(){
         var remaining_time = this.state.remaining_time
         return (
-          <div>{remaining_time}</div>
+          <div class="p-2 text-center bg-danger text-white">
+            <h4>{remaining_time}</h4>
+          </div>
         )
     }
 }

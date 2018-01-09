@@ -80,7 +80,7 @@ $mysqli->query("SET time_zone = '+08:00'");
                 left join user on teacher_subject.teacher = user.id
                 left join subject on teacher_subject.subject = subject.id
                 where exam_question.exam = '".$exam_row['exam_id']."'
-                order by q.type asc";
+                order by q.type,q.id";
 
       $exam_question_result = $mysqli->query($exam_question_sql);
       echo $mysqli->error;

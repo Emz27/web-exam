@@ -23,11 +23,10 @@ const ExamInfo = (props)=>{
   }
 
   return (
-    <div>
-      Remaining Minutes: <Timer start_time={start_time} duration={duration} />
-      <br/>
-      <br/>
-      <Link to={"/student/profile"}><button>Done</button></Link>
+    <div className="d-flex flex-column align-items-stretch  bg-light text-dark border m-0 p-0" style={{width:"200px",boxShadow: "5px 0px 5px grey"}}>
+        <Timer start_time={start_time} duration={duration} />
+        <div className="col"></div>
+        <button className="button mx-auto my-5"><Link to={"/student/profile"}>Done</Link></button>
     </div>
   )
 }

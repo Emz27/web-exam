@@ -62,13 +62,9 @@ class ExamPage extends React.Component{
   }
   render(){
     return (
-      <div>
-        <div>
-          <ExamInfo parent={this} />
-        </div>
-        <div>
-          <ExamSheet parent={this} />
-        </div>
+      <div className="col d-flex align-items-stretch m-0 p-0">
+        <ExamInfo parent={this} />
+        <ExamSheet parent={this} />
       </div>
     )
   }

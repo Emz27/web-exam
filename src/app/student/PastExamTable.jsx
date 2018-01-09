@@ -61,7 +61,7 @@ const PastExamTable = (props)=>{
 
       }</td>
       <td className={"text-center"}>
-        <button type="button" className="btn btn-outline-dark" 
+        <button type="button" className="btn btn-outline-dark"
           onClick={(event)=>{
           }}
           >
@@ -72,7 +72,7 @@ const PastExamTable = (props)=>{
   ));
   return (
     <div>
-      Past Exam
+      <h4>Exam History</h4>
     <table className={"table"}>
       <tr>
         <th className={"text-center"}>#</th>

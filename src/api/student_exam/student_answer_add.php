@@ -25,7 +25,8 @@
             and NOT EXISTS(SELECT * from student_answer
                 left join exam_question on exam_question.id = student_answer.exam_question
                 left join exam on exam.id = exam_question.exam
-                where exam.id = '$exam_id' and student_answer.student = '$student_id')";
+                where exam.id = '$exam_id' and student_answer.student = '$student_id')
+            ORDER BY rand()";
   $mysqli->query($sql);
   echo $mysqli->error;
   $mysqli->close();

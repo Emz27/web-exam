@@ -85,7 +85,8 @@ class LoginPage extends React.Component{
             }}
             required
           />
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+          <span className="text-danger">{(!this.state.isCorrect)?"Incorect Username/Password":""}</span>
+        <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
 
     )

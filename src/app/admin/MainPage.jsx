@@ -50,9 +50,9 @@ class AdminPage extends React.Component{
   render(){
     return (
       <Router>
-      <div>
-        <NavBar user={this.props.user} />
         <div>
+        <NavBar user={this.props.user} />
+        <div className="col">
           <Switch>
             <Route path="/admin" exact component={HomePage} />
             <Route path="/admin/users" component={UserPage} />
