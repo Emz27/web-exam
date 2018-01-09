@@ -62,7 +62,7 @@ const PresentExamTable = (props)=>{
             if(q.exam_questions[0].student_answers.length&& moment(props.parent.state.current_time).diff(q.exam_questions[0].student_answers[0].date_created,"minutes")>q.exam_duration){
               return "Results Pending"
             }
-            else exam_state = "Review Answers"
+            else if(q.exam_questions[0].student_answers.length&& moment(props.parent.state.current_time).diff(q.exam_questions[0].student_answers[0].date_created,"minutes")<=q.exam_duration) exam_state = "Review Answers"
             return (<button type="button" className="btn btn-outline-dark" >
                         <Link to={"/student/exam/"+q.exam_id}>{exam_state}</Link>
                     </button>)

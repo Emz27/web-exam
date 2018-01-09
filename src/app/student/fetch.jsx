@@ -32,6 +32,7 @@ const fetchTime = (props)=>{
     });
 }
 const fetchPresentExam = (props)=>{
+  console.dir(props.state)
     $.post({
       url: "/../api/student_exam/student_exam_fetch.php",
       data:{

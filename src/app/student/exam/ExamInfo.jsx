@@ -8,53 +8,26 @@ import {
 } from 'react-router-dom'
 import moment from 'moment'
 import {QuestionList} from './QuestionList.jsx'
+import {Timer} from './Timer.jsx'
 
 const ExamInfo = (props)=>{
-  const items = props.parent.state.student_present_exams.map((q,index)=>
-        (
-    <tr key={q.exam_id}>
-      <td className={"text-center"}>{index+1}</td>
-      <td className={"text-center"}>{q.exam_type_description}</td>
-      <td className={"text-center"}>{q.exam_subject_description}</td>
-      <td className={"text-center"}>{q.exam_teacher_name}</td>
-      <td className={"text-center"}>{moment(props.parent.state.current_time).to(q.exam_date_start)}</td>
-      <td className={"text-center"}>{moment(props.parent.state.current_time).to(q.exam_date_end)}</td>
-      <td className={"text-center"}>{q.exam_duration+" minutes"}</td>
-      <td className={"text-center"}>
-        {
-          (()=>{
-            console.dir(q);
-            if(q.exam_questions[0].student_answers.length&& moment(props.parent.state.current_time).diff(q.exam_questions[0].student_answers[0].date_created,"minutes")>q.exam_duration){
-              return "Pending"
-            }
-            else return (<button type="button" className="btn btn-outline-dark" 
-                          onClick={(event)=>{
-                          }}>
-                            Exam
-                        </button>)
-          })()
-        }
-      </td>
-    </tr>
-  ));
+  console.dir(props)
+  const present_exam = props.parent.state.student_present_exams.find(e => e.exam_id == props.parent.props.match.params.exam_id);
+
+  var start_time = "";
+  var duration = "";
+  if(present_exam && present_exam.exam_questions[0]&&present_exam.exam_questions[0].student_answers[0]
+    &&present_exam.exam_questions[0].student_answers[0].date_created){
+    start_time = present_exam.exam_questions[0].student_answers[0].date_created
+    duration = present_exam.exam_duration;
+  }
+
   return (
     <div>
-      Present Exam
-    <table className={"table"}>
-      <tr>
-        <th className={"text-center"}>#</th>
-        <th className={"text-center"}>Exam Type</th>
-        <th className={"text-center"}>Subject</th>
-        <th className={"text-center"}>Teacher</th>
-        <th className={"text-center"}>Date Available</th>
-        <th className={"text-center"}>Date Expire</th>
-        <th className={"text-center"}>Duration</th>
-        <th className={"text-center"}>Action</th>
-      </tr>
-      {
-        items
-      }
-    </table>
+      Remaining Minutes: <Timer start_time={start_time} duration={duration} />
+      <br/>
+      <br/>
+      <Link to={"/student/profile"}><button>Done</button></Link>
     </div>
   )
 }
